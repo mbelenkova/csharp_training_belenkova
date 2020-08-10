@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace addressbook_web_main
 {
-    class AccountData
+   public  class AccountData
     {
         private string username;
         private string password;

@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 
 namespace addressbook_web_main
 {
-    class ContactData
+  public  class ContactData
     {
-        private string firstname;
-        private string middlename = "";
+        public string firstname;
+        public string middlename = "";
         private string lastname = "";
         private string nickname = "";
         private string title = "";
@@ -32,6 +35,7 @@ namespace addressbook_web_main
         private string address2 = "";
         private string phone2 = "";
         private string notes = "";
+        private string photo = "";
        
         public ContactData (string firstname)
         {
@@ -301,6 +305,17 @@ namespace addressbook_web_main
             set
             {
                 notes= value;
+            }
+        }
+        public string Photo
+        {
+            get
+            {
+                return photo;
+            }
+            set
+            {
+               photo= value;
             }
         }
     }
