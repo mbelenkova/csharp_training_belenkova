@@ -15,8 +15,8 @@ namespace addressbook_web_main
         [Test]
         public void CreateNewContacm()
         {
-            OpenContactPage();
-            Login(new AccountData("admin", "secret"));
+           app.Navigat.GoToContactPage();
+          app.Auth.Login(new AccountData("admin", "secret"));
             ContactData contact = new ContactData("mary");
             contact.Middlename = "bel";
             contact.Lastname = "bel";
@@ -42,8 +42,8 @@ namespace addressbook_web_main
             contact.Phone2 = "55555555";
             contact.Notes = "test";
             contact.Photo = "D:\test.png";
-            FillInDataFields(contact);
-            SubmitNewContact();
+           app.ContactH.FillInDataFields(contact);
+            app.ContactH.SubmitNewContact();
         }
 
        

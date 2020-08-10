@@ -14,16 +14,16 @@ namespace addressbook_web_main
         [Test]
         public void GroupCreationTestm()
         {
-            OpenHomePage();
-            Login(new AccountData ("admin","secret"));
-            GoToGroupsPage();
-            CreateNewGroup();
+          app.Navigat.OpenHomePage();
+           app.Auth.Login(new AccountData ("admin","secret"));
+            app.Navigat.GoToGroupsPage();
+           app.GruopH.CreateNewGroup();
             GroupData group = new GroupData("test_mary");
             group.Header = "test_mary";
             group.Footer = "test_mary";
-            FillInGroupForm(group);
-            SubmitGroupCreation();
-            ReturnToGroupsPage();
+          app.GruopH.FillInGroupForm(group);
+         app.GruopH.SubmitGroupCreation();
+            app.GruopH.ReturnToGroupsPage();
         }
 
       

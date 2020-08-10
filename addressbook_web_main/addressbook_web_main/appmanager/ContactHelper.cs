@@ -3,93 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
 namespace addressbook_web_main
 {
-   public class TestBase
+    public class ContactHelper: HelperBase
     {
-        protected IWebDriver driver;
-        private StringBuilder verificationErrors;
-        protected string baseURL;
-        protected string ContactBaseURL;
-        private bool acceptNextAlert = true;
 
-        [SetUp]
-        public void SetupTest()
+       // private IWebDriver driver;
+        public ContactHelper(IWebDriver driver):base(driver)
         {
-            driver = new FirefoxDriver();
-            baseURL = "http://localhost";
-            ContactBaseURL = "http://localhost/edit.php";
-            verificationErrors = new StringBuilder();
+          
+
         }
 
-        [TearDown]
-        public void TeardownTest()
-        {
-            try
-            {
-                driver.Quit();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-            Assert.AreEqual("", verificationErrors.ToString());
-        }
-
-        protected void OpenHomePage()
-        {
-
-            driver.Navigate().GoToUrl(baseURL);
-        }
-        protected void OpenContactPage()
-        {
-            driver.Navigate().GoToUrl(ContactBaseURL);
-        }
-        protected void Login(AccountData account)
-        {
-            //login
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(account.Username);
-            driver.FindElement(By.Name("pass")).Click();
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-        }
-        protected void GoToGroupsPage()
-        {
-
-            driver.FindElement(By.LinkText("groups")).Click();
-        }
-        protected void CreateNewGroup()
-        {
-
-            driver.FindElement(By.Name("new")).Click();
-        }
-        protected void FillInGroupForm(GroupData group)
-        {
-
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
-        }
-       
-        protected void ReturnToGroupsPage()
-        {
-
-            driver.FindElement(By.LinkText("group page")).Click();
-        }
-        protected void FillInDataFields(ContactData contact)
+        public void FillInDataFields(ContactData contact)
         {
             //fill in data fields
             driver.FindElement(By.Name("theform")).Click();
@@ -171,17 +101,11 @@ namespace addressbook_web_main
             driver.FindElement(By.Name("notes")).Clear();
             driver.FindElement(By.Name("notes")).SendKeys(contact.Notes);
         }
-        protected void SubmitGroupCreation()
-        {
 
-            driver.FindElement(By.Name("submit")).Click();
-        }
-        protected void SubmitNewContact()
+        public void SubmitNewContact()
         {
             //submit
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
         }
-
-
     }
 }
