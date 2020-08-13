@@ -7,18 +7,21 @@ using NUnit.Framework;
 
 namespace addressbook_web_main
 {
-   public class TestBase
+    public class TestBase
     {
 
-       
-      
+
+
         protected ApplicationManager app;
+
 
         [SetUp]
         public void SetupTest()
         {
 
             app = new ApplicationManager();
+            app.Navigat.OpenHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
 
         }
 
@@ -27,14 +30,9 @@ namespace addressbook_web_main
         {
 
             app.Stop();
+
+
+
         }
-
-        
-       
-       
-       
-       
-
-
     }
 }

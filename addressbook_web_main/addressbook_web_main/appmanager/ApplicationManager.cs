@@ -13,32 +13,40 @@ namespace addressbook_web_main
 
     public class ApplicationManager
     {
+       
         protected IWebDriver driver;
         protected string baseURL;
 
+
+       
         protected LoginHelper loginHelper;
         protected NavigationHepler navigationHepler;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
+       
 
         public ApplicationManager()
         {
-            loginHelper = new LoginHelper(driver);
-            navigationHepler = new NavigationHepler(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            //loginHelper = new LoginHelper(driver);
+           // navigationHepler = new NavigationHepler(driver, baseURL);
+           // groupHelper = new GroupHelper(driver);
+           // contactHelper = new ContactHelper(driver);
 
             driver = new FirefoxDriver();
             baseURL = "http://localhost";
 
            // verificationErrors = new StringBuilder();
-            loginHelper = new LoginHelper(driver);
-            navigationHepler = new NavigationHepler(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            loginHelper = new LoginHelper(this);
+            navigationHepler = new NavigationHepler(this,baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
 
         }
+        public IWebDriver Driver
+        {
+            get { return driver; }
 
+        }
         public void Stop()
         {
             try
@@ -67,5 +75,7 @@ namespace addressbook_web_main
             get { return contactHelper; }
 
         }
+
+       
     }
 }

@@ -12,16 +12,16 @@ namespace addressbook_web_main
     public class NavigationHepler: HelperBase
     {
        // private IWebDriver driver;
-        private string baseURL;
-        
+       protected string baseURL;
 
-        public NavigationHepler(IWebDriver driver,string baseURL) : base(driver)
+
+        public NavigationHepler(ApplicationManager manager, string baseURL) : base(manager)
         {
             this.baseURL = baseURL;
-         
         }
 
-        public void OpenHomePage()
+
+       public void OpenHomePage()
         {
 
             driver.Navigate().GoToUrl(baseURL);
@@ -35,5 +35,7 @@ namespace addressbook_web_main
         {
             driver.Navigate().GoToUrl(baseURL + "/edit.php");
         }
+       
+
     }
 }
