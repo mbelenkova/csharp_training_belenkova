@@ -74,8 +74,8 @@
     <Compile Include="appmanager\NavigationHepler.cs" />
     <Compile Include="tests\TestBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="tests\UnitTest2.cs" />
-    <Compile Include="tests\UnitTest3.cs" />
+    <Compile Include="tests\GroupCreateTests.cs" />
+    <Compile Include="tests\ContactCreateTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
