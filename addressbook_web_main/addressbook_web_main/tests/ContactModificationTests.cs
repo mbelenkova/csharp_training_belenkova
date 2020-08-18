@@ -39,7 +39,9 @@ namespace addressbook_web_main
             CoDatac.Phone2 = "55555555";
             CoDatac.Notes = "testModifyed";
 
-            app.ContactH.ModifyContact(1, CoDatac);
+            
+
+            app.ContactH.ModifyContact(CoDatac);
         }
     }
 }

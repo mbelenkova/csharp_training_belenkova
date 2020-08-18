@@ -19,7 +19,7 @@ namespace addressbook_web_main
             newData.Header = "modifiedData";
             newData.Footer = "modifiedData";
 
-            app.GruopH.ModifyGroup(1, newData);
+            app.GruopH.ModifyGroup(newData);
 
         }
     }

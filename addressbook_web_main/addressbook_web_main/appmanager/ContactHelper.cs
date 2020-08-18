@@ -27,12 +27,12 @@ namespace addressbook_web_main
             return this;
         }
 
-        public ContactHelper ModifyContact(int y,ContactData newCoData)
+        public ContactHelper ModifyContact(ContactData CoDatac)
         {
             // manager.Navigat.OpenHomePage();
             SelectContact();
             InitContactModification();
-            FillInDataFields(newCoData);
+            FillInDataFields(CoDatac);
             SubmitContactModification();
             return this;
         }
@@ -137,7 +137,7 @@ namespace addressbook_web_main
 
         public ContactHelper SelectContact()
         {
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[3]/td/input")).Click();
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[2]/td/input")).Click();
             return this;
         }
 

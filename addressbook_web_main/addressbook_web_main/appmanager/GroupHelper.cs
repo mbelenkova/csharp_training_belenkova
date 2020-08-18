@@ -28,7 +28,7 @@ namespace addressbook_web_main
             return this;
         }
 
-        public GroupHelper ModifyGroup(int v, GroupData newData)
+        public GroupHelper ModifyGroup(GroupData newData)
         {
             manager.Navigat.GoToGroupsPage();
             SelectGroup();
@@ -91,7 +91,7 @@ namespace addressbook_web_main
 
         public GroupHelper SelectGroup()
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[4]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[1]")).Click();
             return this;
         }
         public GroupHelper RemoveGroups()
