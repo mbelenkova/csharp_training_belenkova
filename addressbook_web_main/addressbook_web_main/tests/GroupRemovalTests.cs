@@ -20,10 +20,11 @@ namespace addressbook_web_main
         public void GroupRemovalTestsm()
         {
 
+            app.Navigat.GoToGroupsPage();
 
             if (!IsElementPresent(By.ClassName("group")))
             {
-
+               
                 GroupData group = new GroupData("test_mary");
                 group.Header = "test_mary";
                 group.Footer = "test_mary";
