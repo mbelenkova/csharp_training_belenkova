@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 
 namespace addressbook_web_main
 {
@@ -16,23 +19,18 @@ namespace addressbook_web_main
 
 
         [SetUp]
-        public void SetupTest()
+        public void SetupApplicationManager()
         {
 
-            app = new ApplicationManager();
-            app.Navigat.OpenHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
+            app = ApplicationManager.GetInstance();
+         
 
         }
 
-        [TearDown]
-        public void TeardownTest()
-        {
-
-            app.Stop();
+      
 
 
 
-        }
+
     }
 }

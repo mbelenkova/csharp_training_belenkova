@@ -9,7 +9,7 @@ namespace addressbook_web_main
 {
 
     [TestFixture]
-    public  class ContactModificationTests: TestBase
+    public  class ContactModificationTests: AuthTestBase
     {
         [Test]
         public void ContactModificationTestsm()

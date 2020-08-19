@@ -9,12 +9,12 @@ namespace addressbook_web_main
 {
 
     [TestFixture]
-    public class GroupModificationTests : TestBase
+    public class GroupModificationTests : AuthTestBase
     {
         [Test]
         public void GroupModificationTestsm()
         {
-
+            
             GroupData newData = new GroupData("modifiedData");
             newData.Header = "modifiedData";
             newData.Footer = "modifiedData";

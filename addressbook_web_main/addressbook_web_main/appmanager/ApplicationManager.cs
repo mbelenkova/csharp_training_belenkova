@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Internal;
@@ -16,16 +18,17 @@ namespace addressbook_web_main
        
         protected IWebDriver driver;
         protected string baseURL;
-
+       
 
        
         protected LoginHelper loginHelper;
         protected NavigationHepler navigationHepler;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
-       
 
-        public ApplicationManager()
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
+
+        private ApplicationManager()
         {
             //loginHelper = new LoginHelper(driver);
            // navigationHepler = new NavigationHepler(driver, baseURL);
@@ -41,13 +44,11 @@ namespace addressbook_web_main
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
 
-        }
-        public IWebDriver Driver
-        {
-            get { return driver; }
 
+          
         }
-        public void Stop()
+
+         ~ApplicationManager()
         {
             try
             {
@@ -57,6 +58,24 @@ namespace addressbook_web_main
             {
                 // Ignore errors if unable to close the browser
             }
+
+        }
+
+        public static ApplicationManager GetInstance()
+        {
+            if(!app.IsValueCreated)
+            {
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.Navigat.OpenHomePage();
+                app.Value = newInstance;
+                
+            }
+            return app.Value;
+        }
+        public IWebDriver Driver
+        {
+            get { return driver; }
+
         }
         public LoginHelper Auth
         {

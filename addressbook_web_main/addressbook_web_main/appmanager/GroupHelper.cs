@@ -2,8 +2,11 @@
 using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
@@ -19,13 +22,28 @@ namespace addressbook_web_main
             
         }
 
-        public GroupHelper Remove()
+        public GroupHelper Create(GroupData group)
         {
 
-           manager.Navigat.GoToGroupsPage();
+            manager.Navigat.GoToGroupsPage();
+            CreateNewGroup();
+            FillInGroupForm(group);
+            SubmitGroupCreation();
+            ReturnToGroupsPage();
+            return this;
+
+          
+        }
+
+      
+        public GroupHelper Remove()
+        {
+          
+            manager.Navigat.GoToGroupsPage();
             SelectGroup();
             RemoveGroups();
             return this;
+          
         }
 
         public GroupHelper ModifyGroup(GroupData newData)
@@ -40,19 +58,7 @@ namespace addressbook_web_main
             return this;
         }
 
-       
 
-        public GroupHelper Create(GroupData group)
-        {
-            
-            manager.Navigat.GoToGroupsPage();
-            CreateNewGroup();
-            FillInGroupForm(group);
-            SubmitGroupCreation();
-            ReturnToGroupsPage();
-            return this;
-        }
-      
 
         public GroupHelper CreateNewGroup()
         {
@@ -63,19 +69,13 @@ namespace addressbook_web_main
         
         public GroupHelper FillInGroupForm(GroupData group)
         {
-
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+            Type(By.Name("group_name"), group.Name);
+            Type(By.Name("group_header"), group.Header);
+            Type(By.Name("group_footer"), group.Footer);
             return this;
         }
 
+       
         public GroupHelper ReturnToGroupsPage()
         {
 
@@ -111,5 +111,7 @@ namespace addressbook_web_main
             return this;
 
         }
+
+
     }
 }
