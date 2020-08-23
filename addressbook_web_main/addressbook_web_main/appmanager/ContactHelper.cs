@@ -12,7 +12,8 @@ namespace addressbook_web_main
     public class ContactHelper: HelperBase
     {
 
-       //private IWebDriver driver;
+        public By IsContactPresent = By.ClassName("center");
+        //private IWebDriver driver;
         public ContactHelper(ApplicationManager manager) :base(manager)
         {
           
@@ -133,6 +134,19 @@ namespace addressbook_web_main
         {
             driver.FindElement(By.XPath("(//img[@alt='Edit'])[1]")).Click();
             return this;
+        }
+        
+        private bool IsElementPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
         }
     }
 }

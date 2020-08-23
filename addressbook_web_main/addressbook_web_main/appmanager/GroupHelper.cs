@@ -15,13 +15,16 @@ namespace addressbook_web_main
 {
    public class GroupHelper: HelperBase
     {
-       // private IWebDriver driver;
+        // private IWebDriver driver;
+
+        public By IsGroupPresent = By.ClassName("group");
         public GroupHelper(ApplicationManager manager) : base(manager)
         {
 
             
         }
 
+       
         public GroupHelper Create(GroupData group)
         {
 
@@ -110,6 +113,22 @@ namespace addressbook_web_main
             driver.FindElement(By.Name("edit")).Click();
             return this;
 
+        }
+
+
+
+
+        private bool IsElementPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
         }
 
 

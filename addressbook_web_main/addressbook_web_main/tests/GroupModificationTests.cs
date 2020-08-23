@@ -20,7 +20,7 @@ namespace addressbook_web_main
         {
             app.Navigat.GoToGroupsPage();
 
-            if (!IsElementPresent(By.ClassName("group")))
+            if (!app.GruopH.IsElementPresent(app.GruopH.IsGroupPresent))
             {
 
                 GroupData group = new GroupData("test_mary");
@@ -40,17 +40,5 @@ namespace addressbook_web_main
         }
 
 
-        private bool IsElementPresent(By by)
-        {
-            try
-            {
-                app.Driver.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
     }
 }

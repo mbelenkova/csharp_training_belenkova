@@ -18,7 +18,7 @@ namespace addressbook_web_main
         public void ContactModificationTestsm()
         {
 
-            if (!IsElementPresent(By.ClassName("center")))
+            if (!app.ContactH.IsElementPresent(app.ContactH.IsContactPresent))
             {
 
                 ContactData contact = new ContactData("mary");
@@ -78,18 +78,6 @@ namespace addressbook_web_main
             
 
             app.ContactH.ModifyContact(CoDatac);
-        }
-        private bool IsElementPresent(By by)
-        {
-            try
-            {
-                app.Driver.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
         }
 
     }
