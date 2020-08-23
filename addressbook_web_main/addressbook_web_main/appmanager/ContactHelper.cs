@@ -136,9 +136,9 @@ namespace addressbook_web_main
             return this;
         }
         
-        private bool IsElementPresent(By by)
-        {
-            try
+     /* private bool IsElementPresent(By by)
+      {
+           try
             {
                 driver.FindElement(by);
                 return true;
@@ -147,6 +147,6 @@ namespace addressbook_web_main
             {
                 return false;
             }
-        }
+        }*/
     }
 }

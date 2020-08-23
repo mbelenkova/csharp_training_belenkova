@@ -118,18 +118,18 @@ namespace addressbook_web_main
 
 
 
-        private bool IsElementPresent(By by)
-        {
-            try
-            {
-                driver.FindElement(by);
-                return true;
+    /*  private bool IsElementPresent(By by)
+       {
+          try
+          {
+              driver.FindElement(by);
+               return true;
             }
-            catch (NoSuchElementException)
-            {
-                return false;
+          catch (NoSuchElementException)
+           {
+               return false;
             }
-        }
+       }*/
 
 
     }
