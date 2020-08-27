@@ -22,8 +22,8 @@ namespace addressbook_web_main
             if (!app.ContactH.IsElementPresent(app.ContactH.IsContactPresent))
             {
 
-                ContactData contact = new ContactData("mary");
-                contact.Middlename = "bel";
+                ContactData contact = new ContactData("mary", "bel");
+               // contact.Middlename = "bel";
                 contact.Lastname = "bel";
                 contact.Nickname = "marybel";
                 contact.Title = "title";

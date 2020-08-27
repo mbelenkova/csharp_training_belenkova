@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
 using System.Collections.Generic;
-
+using System.Net;
 
 namespace addressbook_web_main
 {
@@ -17,8 +17,8 @@ namespace addressbook_web_main
         public void CreateNewContacm()
         {
 
-            ContactData contact = new ContactData("mary");
-            contact.Middlename = "bel";
+            ContactData contact = new ContactData("mary","bel");
+            //contact.Middlename = "bel";
             contact.Lastname = "bel";
             contact.Nickname = "marybel";
             contact.Title = "title";
@@ -49,12 +49,14 @@ namespace addressbook_web_main
 
             List<ContactData> newContact = app.ContactH.GetContactList();
 
-            //Assert.AreEqual(oldContact.Count + 1, newContact.Count);
+            //Assert.AreEqual(oldContact.Count + 1, newContact.Count
+
              oldContact.Add(contact);
 
-            oldContact.Sort();
-            newContact.Sort();
+           
 
+            newContact.Sort();
+            oldContact.Sort();
 
           
 

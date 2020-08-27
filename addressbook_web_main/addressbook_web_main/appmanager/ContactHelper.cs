@@ -139,6 +139,7 @@ namespace addressbook_web_main
         {
             //готовим пустой список элементов типа GroupData
             List<ContactData> contacts = new List<ContactData>();
+           // List<ContactData> contactsLastName = new List<ContactData>();
 
             //чтобы посчитать группы нужно сначала перейти на нужнуюб страницу
             manager.Navigat.OpenHomePage();
@@ -150,12 +151,16 @@ namespace addressbook_web_main
             foreach (IWebElement element in elements)//для каждого элемента нудно выполнить действия в такой-то коллекции
             {
                 IList<IWebElement> cells = element.FindElements(By.TagName("td"));
-                //contacts.Add(new ContactData(element.Text));
-                contacts.Add(new ContactData(cells[1].Text));
-                contacts.Add(new ContactData(cells[2].Text));
-            }
 
+                //contacts.Add(new ContactData(element.Text));
+
+               contacts.Add(new ContactData(cells[2].Text, cells[1].Text));
+           
+
+            }
             return contacts;
+           
+            
         }
 
         /* private bool IsElementPresent(By by)

@@ -37,35 +37,38 @@ namespace addressbook_web_main
         private string notes = "";
         private string photo = "";
 
-        public ContactData(string firstname)
+        public ContactData(string firstname,string lastname)
         {
+            this.lastname = lastname;
             this.firstname = firstname;
+            
 
         }
 
         public bool Equals(ContactData other)
         {
-            if (object.ReferenceEquals(other.Firstname, null)&& (object.ReferenceEquals(other.Lastname, null)))//если тот обьект с которым мы сравниваем равен нул то возвращаем фолсе
+            if (Object.ReferenceEquals(other.Lastname, null)&& (Object.ReferenceEquals(other.Firstname, null)))//если тот обьект с которым мы сравниваем равен нул то возвращаем фолсе
             {
                 return false;
 
             }
-            if (object.ReferenceEquals(this, other.Firstname)&& (object.ReferenceEquals(this, other.Lastname)))
+            if (Object.ReferenceEquals(this, other.Lastname)&& (Object.ReferenceEquals(this, other.Firstname)))
             {
                 return true;
             }
 
-            return Firstname == other.Firstname && Lastname == other.Lastname;
+            return Lastname == other.Lastname && Firstname == other.Firstname;
            //return Lastname == other.Lastname;
             
 
         }
         public override int GetHashCode()
         {
-           
-            return Firstname.GetHashCode();
-          //  return Lastname.GetHashCode();
-            
+
+
+
+          return Lastname.GetHashCode();
+          // return Firstname.GetHashCode(); 
 
 
         }
@@ -73,8 +76,8 @@ namespace addressbook_web_main
   
         public override string ToString()
         {
-            return Firstname;
-          //  return Lastname;
+          // return Firstname;
+           return Lastname;
            
 
         }

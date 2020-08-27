@@ -21,8 +21,8 @@ namespace addressbook_web_main
             if (!app.ContactH.IsElementPresent(app.ContactH.IsContactPresent))
             {
 
-                ContactData contact = new ContactData("mary");
-                contact.Middlename = "bel";
+                ContactData contact = new ContactData("mary", "bel");
+                //contact.Middlename = "bel";
                 contact.Lastname = "bel";
                 contact.Nickname = "marybel";
                 contact.Title = "title";
@@ -50,8 +50,8 @@ namespace addressbook_web_main
 
             }
             app.Navigat.OpenHomePage();
-            ContactData CoDatac = new ContactData("Modifyed111");
-            CoDatac.Middlename = "Modifyedbel";
+            ContactData CoDatac = new ContactData("Modifyed111", "Modifyedbel");
+           // CoDatac.Middlename = "Modifyedbel";
             CoDatac.Lastname = "Modifyedbel";
             CoDatac.Nickname = "Modifyedmarybel";
             CoDatac.Title = "Modifyedtitle";
@@ -85,6 +85,7 @@ namespace addressbook_web_main
             oldContact[0].Lastname = CoDatac.Lastname;
 
             oldContact.Sort();
+
             newContact.Sort();
 
             Assert.AreEqual(oldContact, newContact);
