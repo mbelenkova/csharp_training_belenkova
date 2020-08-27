@@ -52,10 +52,14 @@ namespace addressbook_web_main
             //Assert.AreEqual(oldContact.Count + 1, newContact.Count);
              oldContact.Add(contact);
 
-             oldContact.Sort();
-             newContact.Sort();
+            oldContact.Sort();
+            newContact.Sort();
 
-          Assert.AreEqual(oldContact,newContact);
+
+          
+
+
+            Assert.AreEqual(oldContact,newContact);
 
         }
 

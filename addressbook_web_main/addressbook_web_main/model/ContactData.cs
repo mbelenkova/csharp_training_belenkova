@@ -9,7 +9,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace addressbook_web_main
 {
-  public  class ContactData:IEquatable<ContactData>, IComparable<ContactData>
+    public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         public string firstname;
         public string middlename = "";
@@ -36,52 +36,76 @@ namespace addressbook_web_main
         private string phone2 = "";
         private string notes = "";
         private string photo = "";
-       
-        public ContactData (string firstname)
+
+        public ContactData(string firstname)
         {
             this.firstname = firstname;
-          
+
         }
 
         public bool Equals(ContactData other)
         {
-            if (object.ReferenceEquals(other, null))//если тот обьект с которым мы сравниваем равен нул то возвращаем фолсе
+            if (object.ReferenceEquals(other.Firstname, null)&& (object.ReferenceEquals(other.Lastname, null)))//если тот обьект с которым мы сравниваем равен нул то возвращаем фолсе
             {
                 return false;
 
             }
-            if (object.ReferenceEquals(this, other))
+            if (object.ReferenceEquals(this, other.Firstname)&& (object.ReferenceEquals(this, other.Lastname)))
             {
                 return true;
             }
 
-            return Firstname == other.Firstname;
-           return Lastname == other.Lastname;
+            return Firstname == other.Firstname && Lastname == other.Lastname;
+           //return Lastname == other.Lastname;
+            
+
+        }
+        public override int GetHashCode()
+        {
+           
+            return Firstname.GetHashCode();
+          //  return Lastname.GetHashCode();
+            
+
+
         }
 
-        public  override int GetHashCode()
-        {
-            return Firstname.GetHashCode();
-             return Lastname.GetHashCode();
-           
-        }
+  
         public override string ToString()
         {
             return Firstname;
-                   
+          //  return Lastname;
+           
+
         }
+
         public int CompareTo(ContactData other)
         {
-            if (object.ReferenceEquals(other, null))
-            {
-                return 1;
-               
-            }
 
-            return Firstname.CompareTo(other.Firstname);
-            return Lastname.CompareTo(other.Lastname);
+          if (object.ReferenceEquals(other, null))
+
+          {
+                return 1;
+
+           }
+
+        
+         if ((Lastname.CompareTo(other.Lastname)) == 0)
+
+          {
+              return Firstname.CompareTo(other.Firstname);
+
+          }
+
+
+            return (Lastname.CompareTo(other.Lastname));
+
+
 
         }
+
+
+
         public string Firstname
         {
             get
@@ -115,6 +139,8 @@ namespace addressbook_web_main
                 lastname = value;
             }
         }
+
+       
         public string Nickname
         {
             get

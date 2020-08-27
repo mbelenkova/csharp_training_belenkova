@@ -144,12 +144,15 @@ namespace addressbook_web_main
             manager.Navigat.OpenHomePage();
             //далее нужно прочитать список элементов(групп, которые присутствуют на странице)
             ICollection<IWebElement> elements = driver.FindElements(By.Name("entry")); //нас интересуют элементы которые будут иметь тег спан и класс групп
-
+           
             //когда список элементов получен его нудно куда-нибудь сохранить - elements
             //теперь эти элементы этообьекты типа ICollection превратить в нужный нам элемент типа gROUPData
             foreach (IWebElement element in elements)//для каждого элемента нудно выполнить действия в такой-то коллекции
             {
-               contacts.Add(new ContactData(element.Text));
+                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                //contacts.Add(new ContactData(element.Text));
+                contacts.Add(new ContactData(cells[1].Text));
+                contacts.Add(new ContactData(cells[2].Text));
             }
 
             return contacts;
