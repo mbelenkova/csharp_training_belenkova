@@ -90,6 +90,7 @@ namespace addressbook_web_main
         {
 
             driver.FindElement(By.Name("submit")).Click();
+            GroupCach = null;
             return this;
         }
 
@@ -101,11 +102,13 @@ namespace addressbook_web_main
         public GroupHelper RemoveGroups()
         {
             driver.FindElement(By.Name("delete")).Click();
+            GroupCach = null;
             return this;
         }
         public GroupHelper SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            GroupCach = null;
             return this;
         }
 
@@ -116,41 +119,51 @@ namespace addressbook_web_main
 
         }
 
+        private List<GroupData> GroupCach = null;
+
         public List<GroupData> GetGroupList()
         {
-            //готовим пустой список элементов типа GroupData
-            List<GroupData> groups = new List<GroupData>();
 
-            //чтобы посчитать группы нужно сначала перейти на нужнуюб страницу
-            manager.Navigat.GoToGroupsPage();
-            //далее нужно прочитать список элементов(групп, которые присутствуют на странице)
-            ICollection <IWebElement> elements =driver.FindElements(By.CssSelector("span.group")); //нас интересуют элементы которые будут иметь тег спан и класс групп
-
-            //когда список элементов получен его нудно куда-нибудь сохранить - elements
-            //теперь эти элементы этообьекты типа ICollection превратить в нужный нам элемент типа gROUPData
-            foreach (IWebElement element in elements)//для каждого элемента нудно выполнить действия в такой-то коллекции
+            if (GroupCach==null)
             {
-              groups.Add(new GroupData(element.Text));
+                GroupCach = new List<GroupData>();
+
+                //чтобы посчитать группы нужно сначала перейти на нужнуюб страницу
+                manager.Navigat.GoToGroupsPage();
+                //далее нужно прочитать список элементов(групп, которые присутствуют на странице)
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group")); //нас интересуют элементы которые будут иметь тег спан и класс групп
+
+                //когда список элементов получен его нудно куда-нибудь сохранить - elements
+                //теперь эти элементы этообьекты типа ICollection превратить в нужный нам элемент типа gROUPData
+                foreach (IWebElement element in elements)//для каждого элемента нудно выполнить действия в такой-то коллекции
+                {
+                    GroupCach.Add(new GroupData(element.Text));
+                }
+
+
             }
+            //готовим пустой список элементов типа GroupData
+            /* List<GroupData> groups = new List<GroupData>();
 
+             //чтобы посчитать группы нужно сначала перейти на нужнуюб страницу
+             manager.Navigat.GoToGroupsPage();
+             //далее нужно прочитать список элементов(групп, которые присутствуют на странице)
+             ICollection <IWebElement> elements =driver.FindElements(By.CssSelector("span.group")); //нас интересуют элементы которые будут иметь тег спан и класс групп
 
+             //когда список элементов получен его нудно куда-нибудь сохранить - elements
+             //теперь эти элементы этообьекты типа ICollection превратить в нужный нам элемент типа gROUPData
+             foreach (IWebElement element in elements)//для каждого элемента нудно выполнить действия в такой-то коллекции
+             {
+               groups.Add(new GroupData(element.Text));
+             }
 
-            return groups;
+             */
+
+            return new List<GroupData>(GroupCach);
         }
 
 
-        /*  private bool IsElementPresent(By by)
-           {
-              try
-              {
-                  driver.FindElement(by);
-                   return true;
-                }
-              catch (NoSuchElementException)
-               {
-                   return false;
-                }
-           }*/
+
 
 
     }

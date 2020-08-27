@@ -60,11 +60,13 @@ namespace addressbook_web_main
             app.Navigat.OpenHomePage();
 
             List<ContactData> oldContact = app.ContactH.GetContactList();
+
             app.ContactH.ContactRemover();
 
             List<ContactData> newContact = app.ContactH.GetContactList();
 
-            oldContact.RemoveAt(0);
+            //  oldContact.RemoveAt(0);
+            oldContact.RemoveAt(0);            
 
             Assert.AreEqual(oldContact, newContact);
         }

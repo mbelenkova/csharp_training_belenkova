@@ -105,6 +105,7 @@ namespace addressbook_web_main
         {
             //submit
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            ContactCach = null;
             return this;
         }
 
@@ -118,6 +119,7 @@ namespace addressbook_web_main
         {
           
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            ContactCach = null;
             driver.SwitchTo().Alert().Accept();
 
             return this;
@@ -126,6 +128,7 @@ namespace addressbook_web_main
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.XPath("(//input[@name='update'])[2]")).Click();
+            ContactCach = null;
             return this;
         }
 
@@ -135,45 +138,60 @@ namespace addressbook_web_main
             return this;
         }
 
+        private List<ContactData> ContactCach = null;
+
         internal List<ContactData> GetContactList()
         {
-            //готовим пустой список элементов типа GroupData
-            List<ContactData> contacts = new List<ContactData>();
-           // List<ContactData> contactsLastName = new List<ContactData>();
 
-            //чтобы посчитать группы нужно сначала перейти на нужнуюб страницу
-            manager.Navigat.OpenHomePage();
-            //далее нужно прочитать список элементов(групп, которые присутствуют на странице)
-            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry")); //нас интересуют элементы которые будут иметь тег спан и класс групп
-           
-            //когда список элементов получен его нудно куда-нибудь сохранить - elements
-            //теперь эти элементы этообьекты типа ICollection превратить в нужный нам элемент типа gROUPData
-            foreach (IWebElement element in elements)//для каждого элемента нудно выполнить действия в такой-то коллекции
+            if (ContactCach ==null)
             {
-                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                ContactCach = new List<ContactData>();
+                //чтобы посчитать группы нужно сначала перейти на нужнуюб страницу
+                manager.Navigat.OpenHomePage();
+                //далее нужно прочитать список элементов(групп, которые присутствуют на странице)
+                ICollection<IWebElement> elements = driver.FindElements(By.Name("entry")); //нас интересуют элементы которые будут иметь тег спан и класс групп
 
-                //contacts.Add(new ContactData(element.Text));
+                //когда список элементов получен его нудно куда-нибудь сохранить - elements
+                //теперь эти элементы этообьекты типа ICollection превратить в нужный нам элемент типа gROUPData
+                foreach (IWebElement element in elements)//для каждого элемента нудно выполнить действия в такой-то коллекции
+                {
+                    IList<IWebElement> cells = element.FindElements(By.TagName("td"));
 
-               contacts.Add(new ContactData(cells[2].Text, cells[1].Text));
-           
+                    //contacts.Add(new ContactData(element.Text));
+
+                    ContactCach.Add(new ContactData(cells[2].Text, cells[1].Text));
+
+
+                }
 
             }
-            return contacts;
+            //готовим пустой список элементов типа GroupData
+            /* List<ContactData> contacts = new List<ContactData>();
+            // List<ContactData> contactsLastName = new List<ContactData>();
+
+             //чтобы посчитать группы нужно сначала перейти на нужнуюб страницу
+             manager.Navigat.OpenHomePage();
+             //далее нужно прочитать список элементов(групп, которые присутствуют на странице)
+             ICollection<IWebElement> elements = driver.FindElements(By.Name("entry")); //нас интересуют элементы которые будут иметь тег спан и класс групп
+
+             //когда список элементов получен его нудно куда-нибудь сохранить - elements
+             //теперь эти элементы этообьекты типа ICollection превратить в нужный нам элемент типа gROUPData
+             foreach (IWebElement element in elements)//для каждого элемента нудно выполнить действия в такой-то коллекции
+             {
+                 IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+
+                 //contacts.Add(new ContactData(element.Text));
+
+                contacts.Add(new ContactData(cells[2].Text, cells[1].Text));
+
+
+             }
+            */
+            return new List<ContactData>(ContactCach);
            
             
         }
 
-        /* private bool IsElementPresent(By by)
-         {
-              try
-               {
-                   driver.FindElement(by);
-                   return true;
-               }
-               catch (NoSuchElementException)
-               {
-                   return false;
-               }
-           }*/
+
     }
 }
