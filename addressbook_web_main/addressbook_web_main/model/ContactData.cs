@@ -9,7 +9,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace addressbook_web_main
 {
-  public  class ContactData
+  public  class ContactData:IEquatable<ContactData>, IComparable<ContactData>
     {
         public string firstname;
         public string middlename = "";
@@ -40,8 +40,48 @@ namespace addressbook_web_main
         public ContactData (string firstname)
         {
             this.firstname = firstname;
+          
         }
 
+        public bool Equals(ContactData other)
+        {
+            if (object.ReferenceEquals(other, null))//если тот обьект с которым мы сравниваем равен нул то возвращаем фолсе
+            {
+                return false;
+
+            }
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return Firstname == other.Firstname;
+           return Lastname == other.Lastname;
+        }
+
+        public  override int GetHashCode()
+        {
+            return Firstname.GetHashCode();
+             return Lastname.GetHashCode();
+           
+        }
+        public override string ToString()
+        {
+            return Firstname;
+                   
+        }
+        public int CompareTo(ContactData other)
+        {
+            if (object.ReferenceEquals(other, null))
+            {
+                return 1;
+               
+            }
+
+            return Firstname.CompareTo(other.Firstname);
+            return Lastname.CompareTo(other.Lastname);
+
+        }
         public string Firstname
         {
             get

@@ -35,7 +35,17 @@ namespace addressbook_web_main
             newData.Header = "modifiedData";
             newData.Footer = "modifiedData";
 
+            List<GroupData> OldGroups = app.GruopH.GetGroupList();
+
             app.GruopH.ModifyGroup(newData);
+
+            List<GroupData> newGroups = app.GruopH.GetGroupList();
+
+            OldGroups[0].Name = newData.Name;
+            OldGroups.Sort();
+            newGroups.Sort();
+
+            Assert.AreEqual(OldGroups,newGroups);
 
         }
 

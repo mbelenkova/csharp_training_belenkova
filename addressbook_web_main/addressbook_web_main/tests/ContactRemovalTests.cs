@@ -6,6 +6,8 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
+
 
 namespace addressbook_web_main
 {
@@ -45,12 +47,26 @@ namespace addressbook_web_main
                 contact.Phone2 = "55555555";
                 contact.Notes = "test";
                 // contact.Photo = "D:\test.png";
+              
+
                 app.ContactH.ContactCreater(contact);
+
+              
+               
+
 
             }
 
             app.Navigat.OpenHomePage();
+
+            List<ContactData> oldContact = app.ContactH.GetContactList();
             app.ContactH.ContactRemover();
+
+            List<ContactData> newContact = app.ContactH.GetContactList();
+
+            oldContact.RemoveAt(0);
+
+            Assert.AreEqual(oldContact, newContact);
         }
 
        

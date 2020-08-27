@@ -101,7 +101,6 @@ namespace addressbook_web_main
         }
 
        
-
         public ContactHelper SubmitNewContact()
         {
             //submit
@@ -135,18 +134,38 @@ namespace addressbook_web_main
             driver.FindElement(By.XPath("(//img[@alt='Edit'])[1]")).Click();
             return this;
         }
-        
-     /* private bool IsElementPresent(By by)
-      {
-           try
+
+        internal List<ContactData> GetContactList()
+        {
+            //готовим пустой список элементов типа GroupData
+            List<ContactData> contacts = new List<ContactData>();
+
+            //чтобы посчитать группы нужно сначала перейти на нужнуюб страницу
+            manager.Navigat.OpenHomePage();
+            //далее нужно прочитать список элементов(групп, которые присутствуют на странице)
+            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry")); //нас интересуют элементы которые будут иметь тег спан и класс групп
+
+            //когда список элементов получен его нудно куда-нибудь сохранить - elements
+            //теперь эти элементы этообьекты типа ICollection превратить в нужный нам элемент типа gROUPData
+            foreach (IWebElement element in elements)//для каждого элемента нудно выполнить действия в такой-то коллекции
             {
-                driver.FindElement(by);
-                return true;
+               contacts.Add(new ContactData(element.Text));
             }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }*/
+
+            return contacts;
+        }
+
+        /* private bool IsElementPresent(By by)
+         {
+              try
+               {
+                   driver.FindElement(by);
+                   return true;
+               }
+               catch (NoSuchElementException)
+               {
+                   return false;
+               }
+           }*/
     }
 }

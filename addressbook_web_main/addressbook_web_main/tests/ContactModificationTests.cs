@@ -75,9 +75,19 @@ namespace addressbook_web_main
             CoDatac.Phone2 = "55555555";
             CoDatac.Notes = "testModifyed";
 
-            
+            List<ContactData> oldContact = app.ContactH.GetContactList();
 
             app.ContactH.ModifyContact(CoDatac);
+
+            List<ContactData> newContact = app.ContactH.GetContactList();
+
+            oldContact[0].Firstname = CoDatac.Firstname;
+            oldContact[0].Lastname = CoDatac.Lastname;
+
+            oldContact.Sort();
+            newContact.Sort();
+
+            Assert.AreEqual(oldContact, newContact);
         }
 
     }
