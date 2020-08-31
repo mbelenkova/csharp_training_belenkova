@@ -63,15 +63,26 @@ namespace addressbook_web_main
 
             app.ContactH.ContactRemover();
 
+
             List<ContactData> newContact = app.ContactH.GetContactList();
 
+            //GroupData toBeRemoved = OldGroups[0];
+
+            ContactData toBeRemoved = oldContact[0];
             //  oldContact.RemoveAt(0);
-            oldContact.RemoveAt(0);            
+            oldContact.RemoveAt(0);
+           
 
             Assert.AreEqual(oldContact, newContact);
+            
+             foreach (ContactData contact in newContact)
+             {
+                 Assert.AreNotEqual(contact.Id, toBeRemoved.Id);
+             }
+
         }
 
-       
+
     }
 
 

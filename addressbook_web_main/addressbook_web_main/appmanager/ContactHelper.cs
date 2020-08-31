@@ -156,10 +156,16 @@ namespace addressbook_web_main
                 foreach (IWebElement element in elements)//для каждого элемента нудно выполнить действия в такой-то коллекции
                 {
                     IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+                  //  ContactData contact = 
+                    
 
                     //contacts.Add(new ContactData(element.Text));
 
-                    ContactCach.Add(new ContactData(cells[2].Text, cells[1].Text));
+                    ContactCach.Add(new ContactData(cells[2].Text, cells[1].Text)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+
+                    });
 
 
                 }
@@ -192,6 +198,10 @@ namespace addressbook_web_main
             
         }
 
+       public int GetContactCount()
+        {
+            return driver.FindElements(By.Name("entry")).Count;
+        }
 
     }
 }

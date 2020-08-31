@@ -42,12 +42,20 @@ namespace addressbook_web_main
             List<GroupData> OldGroups = app.GruopH.GetGroupList();
 
             app.GruopH.Remove();
+           
 
             List<GroupData> newGroups = app.GruopH.GetGroupList();
 
-             OldGroups.RemoveAt(0);
+            GroupData toBeRemoved = OldGroups[0];
+
+            OldGroups.RemoveAt(0);
 
             Assert.AreEqual(OldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+            }
 
 
         }   

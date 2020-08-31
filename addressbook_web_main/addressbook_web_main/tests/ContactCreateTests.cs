@@ -47,6 +47,9 @@ namespace addressbook_web_main
 
             app.ContactH.ContactCreater(contact);
 
+         
+
+
             List<ContactData> newContact = app.ContactH.GetContactList();
 
             //Assert.AreEqual(oldContact.Count + 1, newContact.Count

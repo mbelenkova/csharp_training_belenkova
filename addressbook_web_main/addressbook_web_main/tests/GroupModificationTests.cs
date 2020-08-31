@@ -37,6 +37,8 @@ namespace addressbook_web_main
 
             List<GroupData> OldGroups = app.GruopH.GetGroupList();
 
+            GroupData oldData = OldGroups[0];
+
             app.GruopH.ModifyGroup(newData);
 
             List<GroupData> newGroups = app.GruopH.GetGroupList();
@@ -46,6 +48,14 @@ namespace addressbook_web_main
             newGroups.Sort();
 
             Assert.AreEqual(OldGroups,newGroups);
+
+            foreach(GroupData group in newGroups)
+            {
+                if(group.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.Name, group.Name);
+                }
+            }
 
         }
 

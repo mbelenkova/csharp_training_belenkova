@@ -79,7 +79,11 @@ namespace addressbook_web_main
 
             app.ContactH.ModifyContact(CoDatac);
 
+           
+
             List<ContactData> newContact = app.ContactH.GetContactList();
+
+            ContactData oldData = oldContact[0];
 
             oldContact[0].Firstname = CoDatac.Firstname;
             oldContact[0].Lastname = CoDatac.Lastname;
@@ -89,6 +93,16 @@ namespace addressbook_web_main
             newContact.Sort();
 
             Assert.AreEqual(oldContact, newContact);
+
+
+            foreach (ContactData contact in newContact)
+            {
+                if (contact.Id == oldData.Id)
+                {
+                    Assert.AreEqual(CoDatac.Firstname,contact.Firstname);
+                    Assert.AreEqual(CoDatac.Lastname,contact.Lastname);
+                }
+            }
         }
 
     }

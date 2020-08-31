@@ -39,7 +39,8 @@ namespace addressbook_web_main
           
         }
 
-      
+       
+
         public GroupHelper Remove()
         {
           
@@ -70,7 +71,9 @@ namespace addressbook_web_main
             driver.FindElement(By.Name("new")).Click();
             return this;
         }
-        
+
+       
+
         public GroupHelper FillInGroupForm(GroupData group)
         {
             Type(By.Name("group_name"), group.Name);
@@ -137,7 +140,12 @@ namespace addressbook_web_main
                 //теперь эти элементы этообьекты типа ICollection превратить в нужный нам элемент типа gROUPData
                 foreach (IWebElement element in elements)//для каждого элемента нудно выполнить действия в такой-то коллекции
                 {
-                    GroupCach.Add(new GroupData(element.Text));
+                  //  GroupData group =
+
+                    GroupCach.Add(new GroupData(element.Text)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    }); 
                 }
 
 
@@ -162,8 +170,7 @@ namespace addressbook_web_main
             return new List<GroupData>(GroupCach);
         }
 
-
-
+     
 
 
     }
