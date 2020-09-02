@@ -51,7 +51,22 @@ namespace addressbook_web_main
         }
         public bool IsLoggedIn(AccountData account)
         {
-            return IsLoggedIn() && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text == "(" + account.Username + ")";
+            //создаем специальный метод, который будет из пользовательского интерфейса вытягивать имя пользователя, который сейчас залогинен
+
+            return IsLoggedIn()
+                && GetLoggedUserName() == account.Username;
+
+
+                
+        }
+
+        private string GetLoggedUserName()
+        {
+
+            string text = driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text;
+            //вырежем кусок строки
+            return text.Substring(1, text.Length - 2);
+
         }
     }
 

@@ -11,6 +11,8 @@ namespace addressbook_web_main
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
+       //private string allphones;
+      // private string allemails;
        // public string firstname;
       //  public string middlename = "";
         private string lastname = "";
@@ -36,6 +38,8 @@ namespace addressbook_web_main
         private string phone2 = "";
         private string notes = "";
         private string photo = "";
+        private string allphones;
+        private string allemails;
 
         public ContactData(string firstname,string lastname)
         {
@@ -138,6 +142,77 @@ namespace addressbook_web_main
 
         public string Mobile { get; set; }
         public string Work { get; set; }
+
+        public string allPhones
+
+        {
+            get
+            {
+                if (allphones!=null)
+                {
+                    return allphones;
+                }
+                else 
+                {
+                    return (CleanUp(Home) + CleanUp(Mobile) + CleanUp(Work)).Trim();
+                }
+
+            }
+
+
+            set
+            {
+                allphones = value;
+            }
+        }
+
+        private string CleanUp(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            else 
+            {
+             return   phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+            }
+          
+        }
+
+        public string allEmails
+        {
+            get
+            {
+                if (allemails != null)
+                {
+                    return allemails;
+                }
+                else
+                {
+                    return (CleanUpEmails(Email) + CleanUpEmails(Email2) + CleanUpEmails(Email3)).Trim();
+                }
+
+            }
+
+
+            set
+            {
+                allemails = value;
+            }
+        }
+
+        private string CleanUpEmails(string emailm)
+        {
+            if (emailm == null || emailm =="")
+            {
+                return "";
+            }
+            else
+            {
+              return  emailm.Replace(" ", "") + "\r\n";
+            }
+           
+        }
 
         public string Fax { get; set; }
        

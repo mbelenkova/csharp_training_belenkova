@@ -13,6 +13,64 @@ namespace addressbook_web_main
     {
 
         public By IsContactPresent = By.ClassName("center");
+
+        public ContactData getContactInformationFromTable(int index)
+        {
+            manager.Navigat.OpenHomePage();
+            IList<IWebElement> cells = driver.FindElements(By.Name("entry"))[index].FindElements(By.TagName("td"));
+
+            string lastname = cells[1].Text;
+
+
+            string firstname = cells[2].Text;
+
+            string address = cells[3].Text;
+
+            string allPhones = cells[5].Text;
+
+            string allEmails = cells[4].Text;
+
+            return new ContactData(firstname, lastname)
+            {
+
+                Address = address,
+                allPhones = allPhones,
+                allEmails = allEmails
+            };
+    
+        }
+
+        public ContactData getContactInformationFromEditForm(int index)
+        {
+            manager.Navigat.OpenHomePage();
+            InitContactModification(0);
+            string firstname = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string lastname = driver.FindElement(By.Name("lastname")).GetAttribute("value");
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+
+            string home  = driver.FindElement(By.Name("home")).GetAttribute("value");
+            string mobile= driver.FindElement(By.Name("mobile")).GetAttribute("value");
+            string work = driver.FindElement(By.Name("work")).GetAttribute("value");
+
+            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
+            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
+
+           return new ContactData(firstname, lastname)
+            {
+
+                Address = address,
+                Mobile =mobile,
+                Home = home,
+                Work = work,
+                Email = email,
+                Email2 = email2,
+                Email3 = email3
+            };
+
+           
+        }
+
         //private IWebDriver driver;
         public ContactHelper(ApplicationManager manager) :base(manager)
         {
@@ -32,7 +90,7 @@ namespace addressbook_web_main
         {
             manager.Navigat.OpenHomePage();
             SelectContact();
-            InitContactModification();
+            InitContactModification(0);
             FillInDataFields(CoDatac);
             SubmitContactModification();
             return this;
@@ -132,9 +190,11 @@ namespace addressbook_web_main
             return this;
         }
 
-        public ContactHelper InitContactModification()
+        public ContactHelper InitContactModification(int index)
         {
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[1]")).Click();
+            driver.FindElements(By.Name("entry"))[index].FindElements(By.TagName("td"))[7].FindElement(By.TagName("a")).Click();
+
+           // driver.FindElement(By.XPath("(//img[@alt='Edit'])[1]")).Click();
             return this;
         }
 
