@@ -11,13 +11,31 @@ namespace addressbook_web_main
     [TestFixture]
     public class CreateNewContac : AuthTestBase
     {
+        public static IEnumerable<ContactData> RandomContactDataProvider()
+        {
+            List<ContactData> contact = new List<ContactData>();
+            for (int i = 0; i < 5;i++)
+            {
+                contact.Add(new ContactData(GenerateRandomString(20), GenerateRandomString(20))
+
+                {
+                    Address = GenerateRandomString(100)
+
+
+                }
+                    ) ;
+            }
+            return contact;
+
+        }
+
        
 
-        [Test]
-        public void CreateNewContacm()
+        [Test, TestCaseSource("RandomContactDataProvider")]
+        public void CreateNewContacm(ContactData contact)
         {
 
-            ContactData contact = new ContactData("mary","bel");
+          /*  ContactData contact = new ContactData("mary","bel");
             //contact.Middlename = "bel";
             contact.Lastname = "bel";
             contact.Nickname = "marybel";
@@ -42,7 +60,7 @@ namespace addressbook_web_main
             contact.Phone2 = "55555555";
             contact.Notes = "test";
             // contact.Photo = "D:\test.png";
-
+          */
             List<ContactData> oldContact = app.ContactH.GetContactList();
 
             app.ContactH.ContactCreater(contact);

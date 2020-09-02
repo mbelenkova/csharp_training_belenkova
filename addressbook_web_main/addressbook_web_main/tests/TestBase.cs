@@ -27,8 +27,42 @@ namespace addressbook_web_main
 
         }
 
-      
+        public static Random rnd = new Random();
+       // public static Random rndco = new Random();
+        
+        public static string GenerateRandomString(int v)
+        {
+            //делаем генератор случайных чисел
+            
+            int l = Convert.ToInt32(rnd.NextDouble() * v);
+            StringBuilder builder = new StringBuilder();
 
+            for (int i =0; i<l;i++)
+            {
+              builder.Append( Convert.ToChar(Convert.ToInt32(rnd.NextDouble() * 223 + 32)));
+            }
+
+            return builder.ToString();
+        }
+
+
+       /* public static string GenerateRandomStringCo(int c)
+        {
+           
+            int lc = Convert.ToInt32(rndco.NextDouble() * c);
+            StringBuilder builderc = new StringBuilder();
+
+            for (int i = 0; i < lc; i++)
+            {
+
+                builderc.Append(Convert.ToChar(Convert.ToInt32(rndco.NextDouble() * 223 + 32)));
+            }
+
+            return builderc.ToString();
+
+
+        }
+       */
 
 
 

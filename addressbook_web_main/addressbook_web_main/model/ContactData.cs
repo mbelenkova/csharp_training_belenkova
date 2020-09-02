@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Text.RegularExpressions;
 
 namespace addressbook_web_main
 {
@@ -85,8 +86,10 @@ namespace addressbook_web_main
         public override string ToString()
         {
           // return Firstname;
-           return Lastname;
-           
+           return ("lastname="+Lastname +"\nfirstname="+Firstname+"\naddress="+address);
+
+           // ("name=" + Name + "\nheader=" + Header + "\nfooter=" + Footer);
+
 
         }
 
@@ -147,39 +150,6 @@ namespace addressbook_web_main
         public string Mobile { get; set; }
         public string Work { get; set; }
 
-  /* public string LISTContactDetails
-        {
-            get
-            {
-                if (allList != null)
-                {
-                    return allList;
-                }
-                else
-                {
-                    return CleanUpList(allList).Trim();
-                }
-
-            }
-            set
-            {
-                allList = value;
-            }
-        }
-        */
-     /*   private string CleanUpList(string contactList)
-        {
-            if (contactList == null || contactList == "")
-            {
-                return "";
-            }
-            else
-            {
-                return contactList.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
-             }
-        }
- */
-
         public string allPhones
 
         {
@@ -211,7 +181,11 @@ namespace addressbook_web_main
             }
             else 
             {
-             return   phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+                //первый параметр это в чем мы будем заменять
+                //второй параметр чтомы будем заменять
+                //третийпараметр на что будем заменять
+
+                return Regex.Replace(phone,"([-()])", "");  //phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
             }
           
         }

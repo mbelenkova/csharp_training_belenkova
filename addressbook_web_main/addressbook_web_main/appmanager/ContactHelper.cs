@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Text.RegularExpressions;
 
 namespace addressbook_web_main
 {
@@ -302,6 +303,14 @@ namespace addressbook_web_main
        public int GetContactCount()
         {
             return driver.FindElements(By.Name("entry")).Count;
+        }
+
+        public int GetNumberOfSearchResults()
+        {
+            manager.Navigat.OpenHomePage();
+            string text = driver.FindElement(By.TagName("label")).Text;
+           Match m = new Regex(@"\d +").Match(text);//создаем регулярное выражение и применяем его к тексту
+          return  Int32.Parse(m.Value);
         }
 
     }
