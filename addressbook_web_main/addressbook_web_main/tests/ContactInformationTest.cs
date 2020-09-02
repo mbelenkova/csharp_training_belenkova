@@ -17,12 +17,16 @@ namespace addressbook_web_main
 
             ContactData fromForm = app.ContactH.getContactInformationFromEditForm(0);
 
+            string fromDetails = app.ContactH.getContactInformationFromDetailsPage(0);
+
+             string fromEditPage =app.ContactH.ListofContactsEditPagee(0);
+
             Assert.AreEqual(fromTable,fromForm);
             Assert.AreEqual(fromTable.Address, fromForm.Address);
             Assert.AreEqual(fromTable.allPhones, fromForm.allPhones);
             Assert.AreEqual(fromTable.allEmails, fromForm.allEmails);
-
-
+           Assert.AreEqual(fromEditPage, fromDetails);
+            
 
 
         }

@@ -40,6 +40,10 @@ namespace addressbook_web_main
         private string photo = "";
         private string allphones;
         private string allemails;
+        private string allList;
+        private string allEditList;
+
+        //private string allList;
 
         public ContactData(string firstname,string lastname)
         {
@@ -143,6 +147,39 @@ namespace addressbook_web_main
         public string Mobile { get; set; }
         public string Work { get; set; }
 
+  /* public string LISTContactDetails
+        {
+            get
+            {
+                if (allList != null)
+                {
+                    return allList;
+                }
+                else
+                {
+                    return CleanUpList(allList).Trim();
+                }
+
+            }
+            set
+            {
+                allList = value;
+            }
+        }
+        */
+     /*   private string CleanUpList(string contactList)
+        {
+            if (contactList == null || contactList == "")
+            {
+                return "";
+            }
+            else
+            {
+                return contactList.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+             }
+        }
+ */
+
         public string allPhones
 
         {
@@ -214,6 +251,29 @@ namespace addressbook_web_main
            
         }
 
+      /* public string allDataEditPage
+        
+        {
+            get 
+             {
+                if (allEditList != null)
+                {
+                    return allEditList;
+                }
+                else
+                {
+                    return (CleanUp(Home) + CleanUp(Mobile) + CleanUp(Work)+ CleanUpEmails(Email) + CleanUpEmails(Email2) + CleanUpEmails(Email3)).Trim();
+                }
+
+
+            }
+            set
+            {
+                allEditList = value;
+            }
+        
+        }
+      */
         public string Fax { get; set; }
        
         public string Email { get; set; }

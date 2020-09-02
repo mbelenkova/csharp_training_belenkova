@@ -48,7 +48,18 @@ namespace addressbook_web_main
 
             driver.Navigate().GoToUrl(baseURL + "/edit.php");
         }
-       
+
+      /*  public void OpenContactDetailsPage(int index)
+        {
+            if (driver.Url == baseURL + "/view.php") 
+            {
+                return;
+            }
+
+            driver.Navigate().GoToUrl(baseURL + "/view.php");
+
+        }
+       */
 
     }
 }
