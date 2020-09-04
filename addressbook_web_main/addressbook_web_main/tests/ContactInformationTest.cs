@@ -32,30 +32,31 @@ namespace addressbook_web_main
             string WEmail2;
             string WEmail3;
 
-            if (fromEditPage.Firstname != null && fromEditPage.Lastname!=null)
+
+            if (fromEditPage.Firstname != "" && fromEditPage.Lastname != "")
             {
-              //  fromEditPage.Firstname=
-               FLName = Convert.ToString(fromEditPage.Firstname + " " + fromEditPage.Lastname );
+                //  fromEditPage.Firstname=
+                FLName = Convert.ToString(fromEditPage.Firstname + " " + fromEditPage.Lastname).Trim();
             }
             else
             {
-                 FLName = "";
+                FLName = "";
             }
 
-
-            if (fromEditPage.Firstname != null && fromEditPage.Lastname == null)
+            if (fromEditPage.Firstname != "" && fromEditPage.Lastname == "")
             {
 
-                FLName = Convert.ToString(fromEditPage.Firstname+ "\r\n");
+                FLName = Convert.ToString(fromEditPage.Firstname).Trim();
             }
-            if (fromEditPage.Firstname == null && fromEditPage.Lastname != null)
+            if (fromEditPage.Firstname == "" && fromEditPage.Lastname != "")
             {
 
-                FLName = Convert.ToString(fromEditPage.Lastname+ "\r\n");
+                FLName = Convert.ToString(fromEditPage.Lastname).Trim();
             }
 
+          
 
-            if (fromEditPage.Address != null)
+            if (fromEditPage.Address != "")
             {
                WAddress= Convert.ToString("\r\n"+fromEditPage.Address);
 
@@ -66,61 +67,93 @@ namespace addressbook_web_main
             }
 
 
-            if (fromEditPage.Home != null && fromEditPage.Mobile != null && fromEditPage.Work != null)
+            if (fromEditPage.Home != "" && fromEditPage.Mobile != "" && fromEditPage.Work != "")
             {
-                WHome = Convert.ToString("H: "+ fromEditPage.Home + "\r\n"+"M: " + fromEditPage.Mobile + "\r\n"+ "W: " + fromEditPage.Work);
+                WHome = Convert.ToString("H: " + fromEditPage.Home + "\r\n" + "M: " + fromEditPage.Mobile + "\r\n" + "W: " + fromEditPage.Work + "\r\n"+ "\r\n").Trim();
 
             }
             else
             {
-                WHome = "";
+                WHome = ""; ;
             }
-            if (fromEditPage.Home == null && fromEditPage.Mobile != null && fromEditPage.Work != null)
+            if (fromEditPage.Home == "" && fromEditPage.Mobile != "" && fromEditPage.Work != "")
             {
-                WHome = Convert.ToString("M: " + fromEditPage.Mobile + "\r\n" + "W: " + fromEditPage.Work);
-
-            }
-            if (fromEditPage.Home != null && fromEditPage.Mobile == null && fromEditPage.Work != null)
-            {
-                WHome = Convert.ToString("H: " + fromEditPage.Home + "\r\n" + "W: " + fromEditPage.Work);
+                WHome = Convert.ToString( "M: " + fromEditPage.Mobile + "\r\n" + "W: " + fromEditPage.Work + "\r\n" + "\r\n").Trim();
 
             }
-            if (fromEditPage.Home != null && fromEditPage.Mobile != null && fromEditPage.Work == null)
+            if (fromEditPage.Home != "" && fromEditPage.Mobile == "" && fromEditPage.Work != "")
             {
-                WHome = Convert.ToString("H: " + fromEditPage.Home + "\r\n" + "M: " + fromEditPage.Mobile );
+                WHome = Convert.ToString("\r\n" + "H: " + fromEditPage.Home + "\r\n" + "W: " + fromEditPage.Work + "\r\n" + "\r\n").Trim();
+
+            }
+            if (fromEditPage.Home != "" && fromEditPage.Mobile != "" && fromEditPage.Work == "")
+            {
+                WHome = Convert.ToString("\r\n" + "H: " + fromEditPage.Home + "\r\n" + "M: " + fromEditPage.Mobile + "\r\n" + "\r\n").Trim();
 
             }
 
-
-            if (fromEditPage.Email != null && fromEditPage.Email2 != null&& fromEditPage.Email3 != null)
+            if (fromEditPage.Home != "" && fromEditPage.Mobile =="" && fromEditPage.Work == "")
             {
-                WEmail = Convert.ToString(fromEditPage.Email+ "\r\n" + fromEditPage.Email2+ "\r\n" + fromEditPage.Email3);
+                WHome = Convert.ToString("\r\n" + "H: " + fromEditPage.Home  + "\r\n" + "\r\n").Trim();
+
+            }
+           
+            if (fromEditPage.Home == "" && fromEditPage.Mobile != "" && fromEditPage.Work == "")
+            {
+                WHome = Convert.ToString("\r\n" + "M: " + fromEditPage.Mobile + "\r\n" + "\r\n").Trim();
+
+            }
+            if (fromEditPage.Home == "" && fromEditPage.Mobile == "" && fromEditPage.Work != "")
+            {
+                WHome = Convert.ToString("\r\n" + "W: " + fromEditPage.Work + "\r\n" + "\r\n").Trim();
+
+            }
+          
+
+            if (fromEditPage.Email != "" && fromEditPage.Email2 != "" && fromEditPage.Email3 != "")
+            {
+                WEmail = Convert.ToString(fromEditPage.Email+ "\r\n" + fromEditPage.Email2+ "\r\n" + fromEditPage.Email3).Trim();
 
             }
             else
             {
-                WEmail = "";
+                WEmail = null;
             }
 
 
-            if (fromEditPage.Email == null && fromEditPage.Email2 != null && fromEditPage.Email3 != null)
+            if (fromEditPage.Email == "" && fromEditPage.Email2 != "" && fromEditPage.Email3 != "")
             {
-                WEmail = Convert.ToString( fromEditPage.Email2 + "\r\n" + fromEditPage.Email3);
+                WEmail = Convert.ToString( fromEditPage.Email2 + "\r\n" + fromEditPage.Email3).Trim();
 
             }
 
-            if (fromEditPage.Email != null && fromEditPage.Email2 == null && fromEditPage.Email3 != null)
+            if (fromEditPage.Email != "" && fromEditPage.Email2 == "" && fromEditPage.Email3 != "")
             {
-                WEmail = Convert.ToString(fromEditPage.Email + "\r\n" + fromEditPage.Email3);
+                WEmail = Convert.ToString(fromEditPage.Email + "\r\n" + fromEditPage.Email3).Trim();
 
             }
-            if (fromEditPage.Email != null && fromEditPage.Email2 != null && fromEditPage.Email3 == null)
+            if (fromEditPage.Email != "" && fromEditPage.Email2 != "" && fromEditPage.Email3 == "")
             {
-                WEmail = Convert.ToString(fromEditPage.Email + "\r\n" + fromEditPage.Email2);
+                WEmail = Convert.ToString(fromEditPage.Email + "\r\n" + fromEditPage.Email2).Trim();
+
+            }
+            if (fromEditPage.Email != "" && fromEditPage.Email2 == "" && fromEditPage.Email3 == "")
+            {
+                WEmail = Convert.ToString(fromEditPage.Email).Trim();
+
+            }
+            if (fromEditPage.Email == "" && fromEditPage.Email2 != "" && fromEditPage.Email3 == "")
+            {
+                WEmail = Convert.ToString(fromEditPage.Email2).Trim();
+
+            }
+            if (fromEditPage.Email == "" && fromEditPage.Email2 == "" && fromEditPage.Email3 != "")
+            {
+                WEmail = Convert.ToString(fromEditPage.Email3).Trim();
 
             }
 
-            string EditList =(FLName + WAddress + "\r\n" + "\r\n"+ WHome + "\r\n"+ "\r\n" + WEmail).Trim();
+            string EditList =(FLName + WAddress + "\r\n"+ "\r\n" +  WHome + "\r\n" + "\r\n" + WEmail).Trim();
 
             // Assert.AreEqual(fromTable,fromForm);
             // Assert.AreEqual(fromTable.Address, fromForm.Address);
