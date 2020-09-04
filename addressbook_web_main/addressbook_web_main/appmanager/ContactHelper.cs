@@ -25,8 +25,9 @@ namespace addressbook_web_main
             string list = driver.FindElement(By.Id("content")).Text;
 
 
-            return list.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "").Replace("H:", "").Replace("M:", "").Replace("W:", "").Trim();
-          //  Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "").Replace("H: ", "")
+            return list;
+
+         
 
         }
 
@@ -92,7 +93,7 @@ namespace addressbook_web_main
            
         }
 
-        public string ListofContactsEditPagee(int index)
+        public ContactData ListofContactsEditPagee(int index)
         {
            manager.Navigat.OpenHomePage();
             InitContactModification(0);
@@ -107,8 +108,22 @@ namespace addressbook_web_main
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
             string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
-          
-            return (firstname + lastname + "\r\n"+ address+ "\r\n" + "\r\n" + home.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "")+ "\r\n" + mobile.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n"+ work.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n" + "\r\n" + email+ "\r\n" + email2+ "\r\n" + email3).Trim(); 
+
+            return new ContactData(firstname, lastname)
+            {
+
+                Address = address,
+                Mobile = mobile,
+                Home = home,
+                Work = work,
+                Email = email,
+                Email2 = email2,
+                Email3 = email3
+            };
+
+            // string EqualOrNot = firstname + " " + lastname + "\r\n" + address + "\r\n" + "\r\n" + "H: " + home + "\r\n" + "M: " + mobile + "\r\n" + "W: " + work + "\r\n" + "\r\n" + email + "\r\n" + email2 + "\r\n" + email3;
+
+            // return (firstname + " "+ lastname+ "\r\n"+ address+ "\r\n" + "\r\n" + "H: "+ home+ "\r\n" +"M: "+ mobile+ "\r\n"+"W: "+ work+ "\r\n" + "\r\n" + email+ "\r\n" + email2+ "\r\n" + email3).Trim(); 
 
         }
 

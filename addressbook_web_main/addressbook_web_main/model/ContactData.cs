@@ -88,8 +88,7 @@ namespace addressbook_web_main
           // return Firstname;
            return ("lastname="+Lastname +"\nfirstname="+Firstname+"\naddress="+address);
 
-           // ("name=" + Name + "\nheader=" + Header + "\nfooter=" + Footer);
-
+           
 
         }
 
@@ -166,7 +165,6 @@ namespace addressbook_web_main
 
             }
 
-
             set
             {
                 allphones = value;
@@ -212,6 +210,8 @@ namespace addressbook_web_main
             }
         }
 
+     
+
         private string CleanUpEmails(string emailm)
         {
             if (emailm == null || emailm =="")
@@ -225,6 +225,7 @@ namespace addressbook_web_main
            
         }
 
+       
       /* public string allDataEditPage
         
         {
