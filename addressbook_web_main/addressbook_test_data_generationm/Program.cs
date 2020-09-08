@@ -19,11 +19,15 @@ namespace addressbook_test_data_generationm
             {
                 writer.WriteLine(String.Format("${0},${1},${2}",   //writer.WriteLine- чтобы строка автоматически завершилась перводом строки
                 TestBase.GenerateRandomString(10),
-                TestBase.GenerateRandomString(10),
-                TestBase.GenerateRandomString(10)
+                TestBase.GenerateRandomString(100),
+                TestBase.GenerateRandomString(100)
+
                 ));
 
             }
+            writer.Close();
+
+
 
         }
     }

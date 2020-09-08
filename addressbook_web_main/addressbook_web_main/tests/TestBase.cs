@@ -45,7 +45,19 @@ namespace addressbook_web_main
             return builder.ToString();
         }
 
+      /*  public static string GenerateRandomnumbers(int n)
+        {
+            int l = rnd.Next() * n;
+            StringBuilder buildern = new StringBuilder();
+            for (int i=0;i<l;i++)
+            {
+                buildern.Append(Convert.ToInt32(rnd.Next()));
 
+            }
+
+            return buildern.ToString();
+        }
+      */
        /* public static string GenerateRandomStringCo(int c)
         {
            
