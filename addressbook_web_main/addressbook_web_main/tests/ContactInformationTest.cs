@@ -155,11 +155,11 @@ namespace addressbook_web_main
 
             string EditList =(FLName + WAddress + "\r\n"+ "\r\n" +  WHome + "\r\n" + "\r\n" + WEmail).Trim();
 
-            // Assert.AreEqual(fromTable,fromForm);
-            // Assert.AreEqual(fromTable.Address, fromForm.Address);
+            Assert.AreEqual(fromTable,fromForm);
+            Assert.AreEqual(fromTable.Address, fromForm.Address);
 
-            //Assert.AreEqual(fromTable.allPhones, fromForm.allPhones);
-            // Assert.AreEqual(fromTable.allEmails, fromForm.allEmails);
+            Assert.AreEqual(fromTable.allPhones, fromForm.allPhones);
+            Assert.AreEqual(fromTable.allEmails, fromForm.allEmails);
 
 
             Assert.AreEqual(fromDetails,EditList);

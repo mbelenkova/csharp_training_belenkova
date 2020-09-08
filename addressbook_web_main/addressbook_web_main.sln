@@ -10,6 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "addressbook_test_data_generationm", "addressbook_test_data_generationm\addressbook_test_data_generationm.csproj", "{83957C6A-AF8D-44A3-BD27-A13FB64D7AFD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{90FF729A-5F9C-4FFD-A4FA-FCB25F204391} = {90FF729A-5F9C-4FFD-A4FA-FCB25F204391}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +25,10 @@ Global
 		{90FF729A-5F9C-4FFD-A4FA-FCB25F204391}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90FF729A-5F9C-4FFD-A4FA-FCB25F204391}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90FF729A-5F9C-4FFD-A4FA-FCB25F204391}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83957C6A-AF8D-44A3-BD27-A13FB64D7AFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83957C6A-AF8D-44A3-BD27-A13FB64D7AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83957C6A-AF8D-44A3-BD27-A13FB64D7AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83957C6A-AF8D-44A3-BD27-A13FB64D7AFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

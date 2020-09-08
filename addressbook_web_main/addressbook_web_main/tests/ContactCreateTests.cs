@@ -5,6 +5,8 @@ using System.Threading;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Net;
+using System.IO;//ДЛЯ РАБОТЫ С ФАЙЛАМИ
+
 
 namespace addressbook_web_main
 {
@@ -29,9 +31,30 @@ namespace addressbook_web_main
 
         }
 
-       
+       public static IEnumerable<ContactData> ContactDataFromFile()
+        {
+            List<ContactData> contact = new List<ContactData>();
+          string [] lines =  File.ReadAllLines(@"contacts.csv"); //string[]lines- возвращаемое значение массив строк
+            foreach (string l in lines)
+            {
+               string [] parts = l.Split(',');  //разбиваем получившиеся строкина куски
 
-        [Test, TestCaseSource("RandomContactDataProvider")]
+                contact.Add(new ContactData(parts[0], parts[1])
+                {
+                    Address = parts[2],
+                    Home= parts[3],
+                    Mobile=parts[4],
+                    Work= parts[5],
+                    Email = parts[6],
+                    Email2 = parts[7],
+                    Email3 = parts[8]
+                });
+              
+            }
+            return contact;
+        }
+
+        [Test, TestCaseSource("ContactDataFromFile")]
         public void CreateNewContacm(ContactData contact)
         {
 

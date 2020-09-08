@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.IO;
 
 namespace addressbook_web_main
 {
@@ -12,7 +13,7 @@ namespace addressbook_web_main
     {
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
-            List<GroupData> groups = new List<GroupData>();
+            List<GroupData> groups = new List<GroupData>();//создаем список
 
             for (int i =0; i<5;i++)
             {
@@ -32,9 +33,27 @@ namespace addressbook_web_main
         }
 
        
+        public static IEnumerable<GroupData> GroupDataFromFile()
+        {
+            List<GroupData> groups = new List<GroupData>();//создаем список
+            string [] lines=File.ReadAllLines(@"groups.csv");
+            foreach(string l in lines)
+            {
+                string[] parts = l.Split(',');
+                groups.Add(new GroupData(parts[0])
+                {
+                    Header = parts[1],
+                    Footer = parts[2]
+                     
+                });
+                   
+
+            }
+            return groups;
+        }
 
         //TestCaseSourse - внешний источник тестовых данных
-        [Test,TestCaseSource("RandomGroupDataProvider")]
+        [Test,TestCaseSource("GroupDataFromFile")]
         public void GroupCreationTestm(GroupData group)
         {
           
