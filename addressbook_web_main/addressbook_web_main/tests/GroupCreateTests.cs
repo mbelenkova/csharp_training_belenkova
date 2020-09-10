@@ -56,6 +56,7 @@ namespace addressbook_web_main
             }
             return groups;
         }
+
         public static IEnumerable<GroupData> GroupDataFromXMLFile()
         {
             List<GroupData> groups = new List<GroupData>();//создаем список

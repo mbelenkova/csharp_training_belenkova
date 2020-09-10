@@ -57,6 +57,7 @@ namespace addressbook_web_main
             return contact;
         }
 
+
         public static IEnumerable<ContactData> ContactDataFromXMLFile()
         {
             List<ContactData> contact = new List<ContactData>();
