@@ -71,6 +71,7 @@ namespace addressbook_web_main
                 File.ReadAllText(@"groups.json")
                 );
         }
+
         //TestCaseSourse - внешний источник тестовых данных
         [Test,TestCaseSource("GroupDataFromJsonFile")]
         public void GroupCreationTestm(GroupData group)
