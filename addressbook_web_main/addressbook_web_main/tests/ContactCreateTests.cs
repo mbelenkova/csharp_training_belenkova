@@ -6,6 +6,9 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Net;
 using System.IO;//ДЛЯ РАБОТЫ С ФАЙЛАМИ
+using System.Xml;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 
 namespace addressbook_web_main
@@ -31,7 +34,7 @@ namespace addressbook_web_main
 
         }
 
-       public static IEnumerable<ContactData> ContactDataFromFile()
+       public static IEnumerable<ContactData> ContactDataFromCSVFile()
         {
             List<ContactData> contact = new List<ContactData>();
           string [] lines =  File.ReadAllLines(@"contacts.csv"); //string[]lines- возвращаемое значение массив строк
@@ -41,49 +44,39 @@ namespace addressbook_web_main
 
                 contact.Add(new ContactData(parts[0], parts[1])
                 {
-                    Address = parts[2],
-                    Home= parts[3],
+                    Address = parts[2]
+                    /*Home= parts[3],
                     Mobile=parts[4],
                     Work= parts[5],
                     Email = parts[6],
                     Email2 = parts[7],
-                    Email3 = parts[8]
+                    Email3 = parts[8]*/
                 });
               
             }
             return contact;
         }
 
-        [Test, TestCaseSource("ContactDataFromFile")]
+        public static IEnumerable<ContactData> ContactDataFromXMLFile()
+        {
+            List<ContactData> contact = new List<ContactData>();
+           
+            return (List<ContactData>)new XmlSerializer(typeof(List<ContactData>))
+                .Deserialize(new StreamReader("contacts.xml"));
+        }
+        public static IEnumerable<ContactData> ContactDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<ContactData>>
+              (
+              File.ReadAllText(@"contacts.json")
+              );
+        }
+
+        [Test, TestCaseSource("ContactDataFromJsonile")]
         public void CreateNewContacm(ContactData contact)
         {
 
-          /*  ContactData contact = new ContactData("mary","bel");
-            //contact.Middlename = "bel";
-            contact.Lastname = "bel";
-            contact.Nickname = "marybel";
-            contact.Title = "title";
-            contact.Company = "company";
-            contact.Address = "address";
-            contact.Home = "111111";
-            contact.Mobile = "2222222";
-            contact.Work = "333333";
-            contact.Fax = "4444444";
-            contact.Email = "test@test.test";
-            contact.Email2 = "test2@mail.local";
-            contact.Email3 = "test3@mail.local";
-            contact.Homepage = "hpomepage";
-            contact.Bday = "17";
-            contact.Bmonth = "February";
-            contact.Byear = "1991";
-            contact.Aday = "17";
-            contact.Amonth = "March";
-            contact.Ayear = "2000";
-            contact.Address2 = "address2";
-            contact.Phone2 = "55555555";
-            contact.Notes = "test";
-            // contact.Photo = "D:\test.png";
-          */
+      
             List<ContactData> oldContact = app.ContactH.GetContactList();
 
             app.ContactH.ContactCreater(contact);

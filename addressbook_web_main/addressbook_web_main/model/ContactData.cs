@@ -54,6 +54,13 @@ namespace addressbook_web_main
 
         }
 
+        public ContactData()
+        {
+           
+
+
+        }
+
         public bool Equals(ContactData other)
         {
             if (Object.ReferenceEquals(other.Lastname, null)&& (Object.ReferenceEquals(other.Firstname, null)))//если тот обьект с которым мы сравниваем равен нул то возвращаем фолсе

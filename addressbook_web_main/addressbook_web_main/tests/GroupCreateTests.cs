@@ -5,6 +5,11 @@ using System.Threading;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
+
+
 
 namespace addressbook_web_main
 {
@@ -33,7 +38,7 @@ namespace addressbook_web_main
         }
 
        
-        public static IEnumerable<GroupData> GroupDataFromFile()
+        public static IEnumerable<GroupData> GroupDataFromCSVFile()
         {
             List<GroupData> groups = new List<GroupData>();//создаем список
             string [] lines=File.ReadAllLines(@"groups.csv");
@@ -51,9 +56,23 @@ namespace addressbook_web_main
             }
             return groups;
         }
+        public static IEnumerable<GroupData> GroupDataFromXMLFile()
+        {
+            List<GroupData> groups = new List<GroupData>();//создаем список
+            return (List<GroupData>)  new XmlSerializer(typeof(List<GroupData>))
+                .Deserialize(new StreamReader("groups.xml"));//читает данные listofGroupData из указанного файла
+         
+        }
+        public static IEnumerable<GroupData> GroupDataFromJsonFile()
+        {
 
+          return  JsonConvert.DeserializeObject<List<GroupData>>
+                (
+                File.ReadAllText(@"groups.json")
+                );
+        }
         //TestCaseSourse - внешний источник тестовых данных
-        [Test,TestCaseSource("GroupDataFromFile")]
+        [Test,TestCaseSource("GroupDataFromJsonFile")]
         public void GroupCreationTestm(GroupData group)
         {
           
