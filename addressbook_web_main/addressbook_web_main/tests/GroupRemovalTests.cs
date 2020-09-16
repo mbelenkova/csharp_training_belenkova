@@ -42,6 +42,7 @@ namespace addressbook_web_main
             List<GroupData> OldGroups = GroupData.GetAll();
 
             GroupData toBeRemoved = OldGroups[0];
+
             app.GruopH.Remove(toBeRemoved);
            
 

@@ -156,14 +156,15 @@ namespace addressbook_web_main
         }
 
         public object ContactRemover()
-        {   
-           SelectContact();
+        {
+            manager.Navigat.OpenHomePage();
+            SelectContact();
            RemoveContact();
         
             return this;
         }
 
-        internal object Remove(ContactData contact)
+        internal object ContactRemover(ContactData contact)
         {
             manager.Navigat.OpenHomePage();
             SelectContact(contact.Id);
@@ -247,7 +248,6 @@ namespace addressbook_web_main
             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[2]/td/input")).Click();
             return this;
         }
-
         public ContactHelper RemoveContact()
         {
           

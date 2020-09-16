@@ -57,23 +57,19 @@ namespace addressbook_web_main
 
             }
 
-            app.Navigat.OpenHomePage();
+           // app.Navigat.OpenHomePage();
 
             List<ContactData> oldContact = ContactData.GetAll();
-           ContactData toBeRemoved = oldContact[0];
+            ContactData toBeRemoved = oldContact[0];
 
-            app.ContactH.Remove(toBeRemoved);
 
-            app.ContactH.ContactRemover();
+            app.ContactH.ContactRemover(toBeRemoved);
 
 
             List<ContactData> newContact = ContactData.GetAll();
 
-            //GroupData toBeRemoved = OldGroups[0];
-
-          //  ContactData toBeRemoved = oldContact[0];
-            //  oldContact.RemoveAt(0);
-            oldContact.RemoveAt(0);
+           
+              oldContact.RemoveAt(0);
            
 
             Assert.AreEqual(oldContact, newContact);
