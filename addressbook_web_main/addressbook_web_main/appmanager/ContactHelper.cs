@@ -175,7 +175,7 @@ namespace addressbook_web_main
 
         public ContactHelper SelectContact(String id)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]' and @id='" + id + "'])")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
             return this;
         }
 
