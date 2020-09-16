@@ -7,9 +7,11 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System.Text.RegularExpressions;
+using LinqToDB.Mapping;
 
 namespace addressbook_web_main
-{
+{ 
+    [Table(Name = "addressbook")]
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
        //private string allphones;
@@ -125,30 +127,21 @@ namespace addressbook_web_main
         }
 
 
-
+        [Column(Name = "firstname")]
         public string Firstname { get; set; }
        
         public string Middlename { get; set; }
-      
+
+        [Column(Name = "lastname")]
         public string Lastname { get; set; }
-       /* {
-            get
-            {
-                return lastname;
-            }
-            set
-            {
-                lastname = value;
-            }
-        }
-       */
-       
+
         public string Nickname { get; set; }
       
         public string Title { get; set; }
       
         public string Company { get; set; }
-        
+
+        [Column(Name = "address")]
         public string Address { get; set; }
 
         public string Home { get; set; }
@@ -285,7 +278,15 @@ namespace addressbook_web_main
         public string Notes { get; set; }
 
         public string Photo { get; set; }
-
+        [Column(Name = "id"),PrimaryKey, Identity]
         public string Id { get; set; }
+
+        public static List<ContactData> GetAll()
+        {
+            using (AddressbookDB db = new AddressbookDB())//устанавливает соединение)
+            {
+               return (from c in db.Contacts select c).ToList();
+            }
+        }
     }
 }

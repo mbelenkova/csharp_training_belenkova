@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using LinqToDB.Mapping;
 
 namespace addressbook_web_main
 {
+    [Table(Name = "group_list")]
     public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
         // private string name;
@@ -15,7 +17,7 @@ namespace addressbook_web_main
 
         public GroupData()
         {
-          
+
 
         }
         public GroupData(string name)
@@ -35,9 +37,9 @@ namespace addressbook_web_main
                 return true;
             }
 
-            return Name ==other.Name;
+            return Name == other.Name;
         }
-    
+
         public override int GetHashCode()
         {
             return Name.GetHashCode();
@@ -45,28 +47,40 @@ namespace addressbook_web_main
 
         public override string ToString()
         {
-            return ("name=" + Name + "\nheader=" + Header + "\nfooter=" +Footer);
+            return ("name=" + Name + "\nheader=" + Header + "\nfooter=" + Footer);
         }
 
         public int CompareTo(GroupData other)
         {
-            if(object.ReferenceEquals(other,null))
+            if (object.ReferenceEquals(other, null))
             {
                 return 1;
             }
 
             return Name.CompareTo(other.Name);
         }
+        [Column(Name = "group_name")]
         public string Name { get; set; }
 
+        [Column(Name = "group_header")]
         public string Header { get; set; }
-     
 
+        [Column(Name = "group_footer")]
         public string Footer { get; set; }
 
+        [Column(Name = "group_id"), PrimaryKey, Identity]
         public string Id { get; set; }
-    
-     
-     
+
+        public static List<GroupData> GetAll()
+        {
+            using (AddressbookDB db = new AddressbookDB())
+            {
+                return (from g in db.Groups select g).ToList();
+
+
+            }
+        }
+           
+          
     }
 }

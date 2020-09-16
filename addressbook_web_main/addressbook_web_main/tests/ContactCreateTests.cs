@@ -9,7 +9,7 @@ using System.IO;//ДЛЯ РАБОТЫ С ФАЙЛАМИ
 using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
-
+using System.Linq;
 
 namespace addressbook_web_main
 {
@@ -105,15 +105,27 @@ namespace addressbook_web_main
 
         }
 
-       
-       
+        public void TestDBConnectivityc()
+        {
+            DateTime start = DateTime.Now;
+            List<ContactData> fromUI = app.ContactH.GetContactList();
+            DateTime end = DateTime.Now;
+            System.Console.WriteLine(end.Subtract(start));
+            start = DateTime.Now;
 
-       
-
-       
-
-      
-
-     
+            List<ContactData> fromDb = ContactData.GetAll();
+            end = DateTime.Now;
+            System.Console.WriteLine(end.Subtract(start));
+        }
     }
-}
+
+
+
+
+
+
+
+
+
+    }
+

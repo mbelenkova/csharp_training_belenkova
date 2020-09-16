@@ -39,14 +39,15 @@ namespace addressbook_web_main
 
             }
 
-            List<GroupData> OldGroups = app.GruopH.GetGroupList();
-
-            app.GruopH.Remove();
-           
-
-            List<GroupData> newGroups = app.GruopH.GetGroupList();
+            List<GroupData> OldGroups = GroupData.GetAll();
 
             GroupData toBeRemoved = OldGroups[0];
+            app.GruopH.Remove(toBeRemoved);
+           
+
+            List<GroupData> newGroups = GroupData.GetAll();
+
+            //GroupData toBeRemoved = OldGroups[0];
 
             OldGroups.RemoveAt(0);
 

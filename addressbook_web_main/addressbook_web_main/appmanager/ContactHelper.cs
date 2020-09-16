@@ -93,6 +93,8 @@ namespace addressbook_web_main
            
         }
 
+      
+
         public ContactData ListofContactsEditPagee(int index)
         {
            manager.Navigat.OpenHomePage();
@@ -160,6 +162,22 @@ namespace addressbook_web_main
         
             return this;
         }
+
+        internal object Remove(ContactData contact)
+        {
+            manager.Navigat.OpenHomePage();
+            SelectContact(contact.Id);
+            RemoveContact();
+
+            return this;
+        }
+
+        public ContactHelper SelectContact(String id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
+            return this;
+        }
+
         public ContactHelper FillInDataFields(ContactData contact)
         {
 
@@ -235,6 +253,7 @@ namespace addressbook_web_main
           
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             ContactCach = null;
+
             driver.SwitchTo().Alert().Accept();
 
             return this;

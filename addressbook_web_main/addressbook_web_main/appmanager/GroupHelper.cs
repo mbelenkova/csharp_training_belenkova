@@ -51,6 +51,14 @@ namespace addressbook_web_main
           
         }
 
+        public GroupHelper Remove(GroupData group)
+        {
+            manager.Navigat.GoToGroupsPage();
+            SelectGroup(group.Id);
+            RemoveGroups();
+            return this;
+        }
+
         public GroupHelper ModifyGroup(GroupData newData)
         {
             manager.Navigat.GoToGroupsPage();
@@ -64,7 +72,11 @@ namespace addressbook_web_main
         }
 
 
-
+        public GroupHelper SelectGroup(String id)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+id+"'])")).Click();
+            return this;
+        }
         public GroupHelper CreateNewGroup()
         {
 

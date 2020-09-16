@@ -8,6 +8,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using System.Linq;
 
 
 
@@ -139,6 +140,22 @@ namespace addressbook_web_main
             //            Assert.AreEqual(OldGroups.Count + 1, newGroups.Count);
             Assert.AreEqual(OldGroups, newGroups);
 
+        }
+
+        [Test]
+        public void TestDBConnectivity()
+        {
+            DateTime start = DateTime.Now;
+            List<GroupData> fromUI= app.GruopH.GetGroupList();
+            DateTime end = DateTime.Now;
+            System.Console.WriteLine(end.Subtract(start));
+            start = DateTime.Now;
+
+            List<GroupData> fromDb = GroupData.GetAll();
+
+
+            end = DateTime.Now;
+            System.Console.WriteLine(end.Subtract(start));
         }
     }
 

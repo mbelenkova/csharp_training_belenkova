@@ -59,16 +59,19 @@ namespace addressbook_web_main
 
             app.Navigat.OpenHomePage();
 
-            List<ContactData> oldContact = app.ContactH.GetContactList();
+            List<ContactData> oldContact = ContactData.GetAll();
+           ContactData toBeRemoved = oldContact[0];
+
+            app.ContactH.Remove(toBeRemoved);
 
             app.ContactH.ContactRemover();
 
 
-            List<ContactData> newContact = app.ContactH.GetContactList();
+            List<ContactData> newContact = ContactData.GetAll();
 
             //GroupData toBeRemoved = OldGroups[0];
 
-            ContactData toBeRemoved = oldContact[0];
+          //  ContactData toBeRemoved = oldContact[0];
             //  oldContact.RemoveAt(0);
             oldContact.RemoveAt(0);
            
