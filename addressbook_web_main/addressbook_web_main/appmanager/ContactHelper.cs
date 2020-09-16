@@ -164,7 +164,7 @@ namespace addressbook_web_main
             return this;
         }
 
-        internal object ContactRemover(ContactData contact)
+        internal object Remove(ContactData contact)
         {
             manager.Navigat.OpenHomePage();
             SelectContact(contact.Id);
@@ -175,7 +175,7 @@ namespace addressbook_web_main
 
         public ContactHelper SelectContact(String id)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @id='" + id + "'])")).Click();
             return this;
         }
 
