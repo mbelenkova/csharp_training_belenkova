@@ -12,7 +12,7 @@ using System.Collections.Generic;
 namespace addressbook_web_main
 {
     [TestFixture]
-    public class ContactRemovalTests : AuthTestBase
+    public class ContactRemovalTests : ContactTestBase
     { 
         [Test]
         public void ContactRemovalTestsm()

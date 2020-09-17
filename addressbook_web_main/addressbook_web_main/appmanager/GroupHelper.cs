@@ -51,6 +51,8 @@ namespace addressbook_web_main
           
         }
 
+       
+
         public GroupHelper Remove(GroupData group)
         {
             manager.Navigat.GoToGroupsPage();
@@ -71,6 +73,17 @@ namespace addressbook_web_main
             return this;
         }
 
+        public GroupHelper AddChanges(GroupData group, GroupData newData)
+        {
+            manager.Navigat.GoToGroupsPage();
+            SelectGroup(group.Id);
+            InitGroupModification();
+            FillInGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
+
+            return this;
+        }
 
         public GroupHelper SelectGroup(String id)
         {

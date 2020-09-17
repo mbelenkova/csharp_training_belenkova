@@ -129,6 +129,8 @@ namespace addressbook_web_main
 
         }
 
+       
+
 
         //private IWebDriver driver;
         public ContactHelper(ApplicationManager manager) :base(manager)
@@ -149,6 +151,17 @@ namespace addressbook_web_main
         {
             manager.Navigat.OpenHomePage();
             SelectContact();
+            InitContactModification(0);
+            FillInDataFields(CoDatac);
+            SubmitContactModification();
+            return this;
+        }
+
+        public ContactHelper AddChanges(ContactData contact, ContactData CoDatac)
+        {
+
+            manager.Navigat.OpenHomePage();
+            SelectContact(contact.Id);
             InitContactModification(0);
             FillInDataFields(CoDatac);
             SubmitContactModification();
@@ -239,7 +252,9 @@ namespace addressbook_web_main
         {
             //submit
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+
             ContactCach = null;
+           
             return this;
         }
 
@@ -255,6 +270,7 @@ namespace addressbook_web_main
             ContactCach = null;
 
             driver.SwitchTo().Alert().Accept();
+            driver.FindElement(By.CssSelector("div.msgbox"));
 
             return this;
         }

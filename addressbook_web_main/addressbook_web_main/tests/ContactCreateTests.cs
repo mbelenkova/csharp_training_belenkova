@@ -14,7 +14,7 @@ using System.Linq;
 namespace addressbook_web_main
 {
     [TestFixture]
-    public class CreateNewContac : AuthTestBase
+    public class CreateNewContac : ContactTestBase
     {
         public static IEnumerable<ContactData> RandomContactDataProvider()
         {
@@ -75,19 +75,19 @@ namespace addressbook_web_main
 
 
 
-        [Test, TestCaseSource("ContactDataFromJsonile")]
+        [Test, TestCaseSource("ContactDataFromJsonFile")]
         public void CreateNewContacm(ContactData contact)
         {
 
       
-            List<ContactData> oldContact = app.ContactH.GetContactList();
+            List<ContactData> oldContact = ContactData.GetAll();
 
             app.ContactH.ContactCreater(contact);
 
          
 
 
-            List<ContactData> newContact = app.ContactH.GetContactList();
+            List<ContactData> newContact = ContactData.GetAll();
 
             //Assert.AreEqual(oldContact.Count + 1, newContact.Count
 
@@ -105,7 +105,7 @@ namespace addressbook_web_main
 
         }
 
-        public void TestDBConnectivityc()
+     /*   public void TestDBConnectivityc()
         {
             DateTime start = DateTime.Now;
             List<ContactData> fromUI = app.ContactH.GetContactList();
@@ -116,7 +116,7 @@ namespace addressbook_web_main
             List<ContactData> fromDb = ContactData.GetAll();
             end = DateTime.Now;
             System.Console.WriteLine(end.Subtract(start));
-        }
+        }*/
     }
 
 

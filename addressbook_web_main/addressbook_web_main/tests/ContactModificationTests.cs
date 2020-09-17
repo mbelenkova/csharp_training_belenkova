@@ -12,7 +12,7 @@ namespace addressbook_web_main
 {
 
     [TestFixture]
-    public  class ContactModificationTests: AuthTestBase
+    public  class ContactModificationTests:ContactTestBase
     {
         [Test]
         public void ContactModificationTestsm()
@@ -75,15 +75,18 @@ namespace addressbook_web_main
             CoDatac.Phone2 = "55555555";
             CoDatac.Notes = "testModifyed";
 
-            List<ContactData> oldContact = app.ContactH.GetContactList();
+            List<ContactData> oldContact = ContactData.GetAll();
 
-            app.ContactH.ModifyContact(CoDatac);
+            ContactData toBeChanged = oldContact[0];
+
+            app.ContactH.AddChanges(toBeChanged,CoDatac);
+           // app.ContactH.ModifyContact(CoDatac);
 
            
 
-            List<ContactData> newContact = app.ContactH.GetContactList();
+            List<ContactData> newContact = ContactData.GetAll();
 
-            ContactData oldData = oldContact[0];
+          //  ContactData oldData = oldContact[0];
 
             oldContact[0].Firstname = CoDatac.Firstname;
             oldContact[0].Lastname = CoDatac.Lastname;
@@ -97,7 +100,7 @@ namespace addressbook_web_main
 
             foreach (ContactData contact in newContact)
             {
-                if (contact.Id == oldData.Id)
+                if (contact.Id == toBeChanged.Id)
                 {
                     Assert.AreEqual(CoDatac.Firstname,contact.Firstname);
                     Assert.AreEqual(CoDatac.Lastname,contact.Lastname);

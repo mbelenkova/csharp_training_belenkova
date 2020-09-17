@@ -15,7 +15,7 @@ using System.Linq;
 namespace addressbook_web_main
 {
     [TestFixture]
-    public class GroupCreationTest : AuthTestBase
+    public class GroupCreationTest : GroupTestBase
     {
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
@@ -85,13 +85,13 @@ namespace addressbook_web_main
             group.Footer = "test_mary";
          */
             //передтем как добавлять группу мы получим список групп
-            List<GroupData> OldGroups = app.GruopH.GetGroupList();
+            List<GroupData> OldGroups =GroupData.GetAll() ;
 
             app.GruopH.Create(group);
 
         
             //после того как группа добавлена мы получим список групп
-            List <GroupData> newGroups = app.GruopH.GetGroupList();
+            List <GroupData> newGroups = GroupData.GetAll();
 
             OldGroups.Add(group);
 

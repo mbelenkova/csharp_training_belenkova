@@ -14,7 +14,7 @@ using System.Collections.Generic;
 namespace addressbook_web_main
 {
     [TestFixture]
-    public class GroupRemovalTests : AuthTestBase
+    public class GroupRemovalTests : GroupTestBase
     {
         
         [Test]

@@ -13,7 +13,7 @@ namespace addressbook_web_main
 {
 
     [TestFixture]
-    public class GroupModificationTests : AuthTestBase
+    public class GroupModificationTests : GroupTestBase
     {
         [Test]
         public void GroupModificationTestsm()
@@ -35,13 +35,17 @@ namespace addressbook_web_main
             newData.Header = "modifiedData";
             newData.Footer = "modifiedData";
 
-            List<GroupData> OldGroups = app.GruopH.GetGroupList();
+            List<GroupData> OldGroups = GroupData.GetAll();
 
-            GroupData oldData = OldGroups[0];
+            GroupData toBeChanged = OldGroups[0];
 
-            app.GruopH.ModifyGroup(newData);
+            // GroupData oldData = OldGroups[0];
 
-            List<GroupData> newGroups = app.GruopH.GetGroupList();
+            app.GruopH.AddChanges(toBeChanged,newData);
+
+          //  app.GruopH.ModifyGroup(newData);
+
+            List<GroupData> newGroups = GroupData.GetAll();
 
             OldGroups[0].Name = newData.Name;
             OldGroups.Sort();
@@ -51,7 +55,7 @@ namespace addressbook_web_main
 
             foreach(GroupData group in newGroups)
             {
-                if(group.Id == oldData.Id)
+                if(group.Id == toBeChanged.Id)
                 {
                     Assert.AreEqual(newData.Name, group.Name);
                 }
