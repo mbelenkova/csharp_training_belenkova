@@ -31,8 +31,53 @@ namespace addressbook_web_main
 
         }
 
-   
-        
+        public void RemoveContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigat.OpenHomePage();
+            ClearGroupFilter();
+            SelectGroupInFilter(group.Name);
+            SelectContact(contact.Id);
+            RemoveContactFromGroupm();
+        }
+
+        private void SelectGroupInFilter(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(name);
+        }
+        private void RemoveContactFromGroupm()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
+            driver.FindElement(By.CssSelector("div.msgbox"));
+
+        }
+        public void AddContactToGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigat.OpenHomePage();
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void CommitAddingContactToGroup()
+        {
+          driver.FindElement(By.Name("add")).Click();
+            
+        }
+
+        public void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        public void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
+            
+        }
+
         public ContactData getContactInformationFromTable(int index)
         {
             manager.Navigat.OpenHomePage();
@@ -289,6 +334,7 @@ namespace addressbook_web_main
            // driver.FindElement(By.XPath("(//img[@alt='Edit'])[1]")).Click();
             return this;
         }
+
 
         private List<ContactData> ContactCach = null;
 

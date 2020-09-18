@@ -81,6 +81,17 @@ namespace addressbook_web_main
             }
         }
            
-          
+        public List <ContactData> GetContacts()
+        {
+            using (AddressbookDB db = new AddressbookDB())
+            {
+                return (from c in db.Contacts 
+                        from gcr in db.GCR.Where(P=>P.GroupId == Id && P.ContactId ==c.Id && c.Deprecated == "0000-00-00 00:00:00") select c).Distinct().ToList();
+
+
+
+            }
+        }
+
     }
 }

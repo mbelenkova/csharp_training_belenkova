@@ -145,17 +145,23 @@ namespace addressbook_web_main
         [Test]
         public void TestDBConnectivity()
         {
-            DateTime start = DateTime.Now;
-            List<GroupData> fromUI= app.GruopH.GetGroupList();
-            DateTime end = DateTime.Now;
-            System.Console.WriteLine(end.Subtract(start));
-            start = DateTime.Now;
-
-            List<GroupData> fromDb = GroupData.GetAll();
+            foreach (ContactData contact in GroupData.GetAll()[0].GetContacts())
+            {
+               System.Console.Out.WriteLine(contact);
+            }
 
 
-            end = DateTime.Now;
-            System.Console.WriteLine(end.Subtract(start));
+            /*DateTime start = DateTime.Now;
+             List<GroupData> fromUI= app.GruopH.GetGroupList();
+             DateTime end = DateTime.Now;
+             System.Console.WriteLine(end.Subtract(start));
+             start = DateTime.Now;
+
+             List<GroupData> fromDb = GroupData.GetAll();
+
+
+             end = DateTime.Now;
+             System.Console.WriteLine(end.Subtract(start));*/
         }
     }
 

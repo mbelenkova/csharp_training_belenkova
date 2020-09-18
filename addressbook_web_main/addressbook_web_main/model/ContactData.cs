@@ -155,6 +155,9 @@ namespace addressbook_web_main
         [Column(Name = "work")]
         public string Work { get; set; }
         
+        [Column (Name = "deprecated")]
+        public string Deprecated { get; set; }
+
         public string allPhones
 
         {
@@ -293,6 +296,18 @@ namespace addressbook_web_main
             using (AddressbookDB db = new AddressbookDB())//устанавливает соединение)
             {
                return (from c in db.Contacts select c).ToList();
+            }
+        }
+
+        public List<GroupData> GetGroups()
+        {
+            using (AddressbookDB db = new AddressbookDB())
+            {
+
+                return (from g in db.Groups from gcr in db.GCR.Where(P => P.GroupId == Id && P.ContactId == g.Id) select g).ToList();
+
+
+
             }
         }
     }
