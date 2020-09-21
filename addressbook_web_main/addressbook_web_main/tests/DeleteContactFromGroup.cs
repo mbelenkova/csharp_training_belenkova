@@ -13,66 +13,66 @@ namespace addressbook_web_main
         [Test]
         public void RemoveContactFromGroup()
         {
-
+            app.Navigat.OpenHomePage();
              
             if (!app.ContactH.IsElementPresent(app.ContactH.IsContactPresent))
             {
-                ContactData contact_present = new ContactData("mary", "bel");
+                ContactData contact = new ContactData("mary", "bel");
 
-                contact_present.Lastname = "bel";
-                contact_present.Nickname = "marybel";
+                contact.Lastname = "bel";
+                contact.Nickname = "marybel";
 
-                contact_present.Address = "address";
+                contact.Address = "address";
 
 
-                app.ContactH.ContactCreater(contact_present);
+                app.ContactH.ContactCreater(contact);
 
 
             }
-            else
+            app.Navigat.GoToGroupsPage();
             if (!app.GruopH.IsElementPresent(app.GruopH.IsGroupPresent))
             {
 
-                GroupData group_present = new GroupData("test_mary");
-                group_present.Header = "test_mary";
-                group_present.Footer = "test_mary";
+                GroupData group = new GroupData("test_mary");
+                group.Header = "test_mary";
+                group.Footer = "test_mary";
 
 
 
-               app.GruopH.Create(group_present);
+                app.GruopH.Create(group);
 
 
 
             }
             else
+              app.Navigat.OpenHomePage();
             if (!app.GruopH.IsElementPresent(app.GruopH.IsGroupPresent) && !app.ContactH.IsElementPresent(app.ContactH.IsContactPresent))
             {
-                ContactData contact_present = new ContactData("mary", "bel");
+                ContactData contact= new ContactData("mary", "bel");
 
-                contact_present.Lastname = "bel";
-
-
-                contact_present.Address = "address";
+                contact.Lastname = "bel";
 
 
-
-
-                app.ContactH.ContactCreater(contact_present);
-
-
-                GroupData group_present = new GroupData("test_mary");
-                group_present.Header = "test_mary";
-                group_present.Footer = "test_mary";
+                contact.Address = "address";
 
 
 
-                app.GruopH.Create(group_present);
+
+                app.ContactH.ContactCreater(contact);
+
+
+                GroupData group = new GroupData("test_mary");
+                group.Header = "test_mary";
+                group.Footer = "test_mary";
+
+
+
+                app.GruopH.Create(group);
 
 
             }
            
-            if (app.GruopH.IsElementPresent(app.GruopH.IsGroupPresent) && app.ContactH.IsElementPresent(app.ContactH.IsContactPresent))
-            {
+           
 
                 foreach (ContactData contact in ContactData.GetAll())//беру контакты из списка контактов
                 {
@@ -98,6 +98,7 @@ namespace addressbook_web_main
                         app.ContactH.RemoveContactFromGroup(contact, group);
                     }
 
+
                     oldList.RemoveAt(0);
 
                     List<ContactData> newList = group.GetContacts();
@@ -115,7 +116,7 @@ namespace addressbook_web_main
 
 
 
-            }
+            
           
 
             
