@@ -46,9 +46,9 @@ namespace addressbook_web_main
         }
         private void RemoveContactFromGroupm()
         {
-            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
-            driver.SwitchTo().Alert().Accept();
-            driver.FindElement(By.CssSelector("div.msgbox"));
+            driver.FindElement(By.Name("remove")).Click();
+           // driver.SwitchTo().Alert().Accept();
+           // driver.FindElement(By.CssSelector("div.msgbox"));
 
         }
         public void AddContactToGroup(ContactData contact, GroupData group)
