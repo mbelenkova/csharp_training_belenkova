@@ -44,7 +44,7 @@ namespace addressbook_web_main
 
 
             }
-            else
+           
               app.Navigat.OpenHomePage();
             if (!app.GruopH.IsElementPresent(app.GruopH.IsGroupPresent) && !app.ContactH.IsElementPresent(app.ContactH.IsContactPresent))
             {
@@ -78,28 +78,32 @@ namespace addressbook_web_main
                 {
 
 
-                    GroupData group = GroupData.GetAll()[0];
+                    
 
                     List<GroupData> groupn = contact.GetGroups();
 
-                    List<ContactData> oldList = group.GetContacts();
+                   GroupData group = GroupData.GetAll()[0];
 
 
+                List<ContactData> oldList = group.GetContacts();
 
-                    if (groupn.Count == 0)
+
+                if (groupn.Count == 0)
                     {
                         app.ContactH.AddContactToGroup(contact, group);
 
                         app.ContactH.RemoveContactFromGroup(contact, group);
 
-                    }
+                       
+                }
                     else
                     {
                         app.ContactH.RemoveContactFromGroup(contact, group);
-                    }
+                   
+                }
+                 
 
-
-                    oldList.RemoveAt(0);
+                   oldList.RemoveAt(0);
 
                     List<ContactData> newList = group.GetContacts();
 
