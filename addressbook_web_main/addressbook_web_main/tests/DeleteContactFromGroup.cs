@@ -14,18 +14,71 @@ namespace addressbook_web_main
         public void RemoveContactFromGroup()
         {
 
-             GroupData group = GroupData.GetAll()[0];
+          
             
 
             foreach (ContactData contact in ContactData.GetAll())//беру контакты из списка контактов
             {
+                if (!app.ContactH.IsElementPresent(app.ContactH.IsContactPresent))
+                {
+                    ContactData contact_present = new ContactData("mary", "bel");
+                   
+                    contact_present.Lastname = "bel";
+                    contact_present.Nickname = "marybel";
 
-          
+                    contact_present.Address = "address";
+
+
+                    app.ContactH.ContactCreater(contact_present);
+
+
+                }
+                if (!app.GruopH.IsElementPresent(app.GruopH.IsGroupPresent))
+                {
+
+                    GroupData group_present = new GroupData("test_mary");
+                    group_present.Header = "test_mary";
+                    group_present.Footer = "test_mary";
+
+
+
+                    app.GruopH.Create(group_present);
+
+
+
+                }
+                if (!app.GruopH.IsElementPresent(app.GruopH.IsGroupPresent) && !app.ContactH.IsElementPresent(app.ContactH.IsContactPresent))
+                {
+                    ContactData contact_present = new ContactData("mary", "bel");
+           
+                    contact_present.Lastname = "bel";
+                    
+
+                    contact_present.Address = "address";
+                    
+                   
+
+
+                    app.ContactH.ContactCreater(contact_present);
+
+
+                    GroupData group_present = new GroupData("test_mary");
+                    group_present.Header = "test_mary";
+                    group_present.Footer = "test_mary";
+
+
+
+                    app.GruopH.Create(group_present);
+
+
+                }
+
+                GroupData group = GroupData.GetAll()[0];
 
                 List<GroupData> groupn = contact.GetGroups();
 
                 List<ContactData> oldList = group.GetContacts();
-
+             
 
 
                 if (groupn.Count == 0)
@@ -40,6 +93,8 @@ namespace addressbook_web_main
                     app.ContactH.RemoveContactFromGroup(contact, group);
                 }
 
+             
+
                 oldList.RemoveAt(0);
 
                 List<ContactData> newList = group.GetContacts();
@@ -51,15 +106,7 @@ namespace addressbook_web_main
                     Assert.AreNotEqual(group.Id, contact.Id);
                 }
 
-                /*  List<ContactData> newList = group.GetContacts();
-
-                  oldList.RemoveAt(0);
-
-                  newList.Sort();
-                  oldList.Sort();
-
-                  Assert.AreEqual(oldList, newList);
-                */
+               
             }
 
             
