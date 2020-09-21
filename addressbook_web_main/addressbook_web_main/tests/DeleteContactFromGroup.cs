@@ -41,6 +41,8 @@ namespace addressbook_web_main
 
                 app.GruopH.Create(group);
 
+            
+
 
 
             }
@@ -69,6 +71,8 @@ namespace addressbook_web_main
 
                 app.GruopH.Create(group);
 
+                
+
 
             }
            
@@ -78,11 +82,11 @@ namespace addressbook_web_main
                 {
 
 
-                    
 
-                    List<GroupData> groupn = contact.GetGroups();
+                GroupData group = GroupData.GetAll()[0];
 
-                   GroupData group = GroupData.GetAll()[0];
+
+                List<GroupData> groupn = contact.GetGroups();
 
 
                 List<ContactData> oldList = group.GetContacts();
@@ -103,7 +107,8 @@ namespace addressbook_web_main
                 }
                  
 
-                   oldList.RemoveAt(0);
+                
+                     oldList.RemoveAt(0);
 
                     List<ContactData> newList = group.GetContacts();
 
