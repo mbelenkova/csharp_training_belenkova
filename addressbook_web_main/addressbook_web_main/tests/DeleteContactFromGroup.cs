@@ -96,9 +96,12 @@ namespace addressbook_web_main
                     {
                         app.ContactH.AddContactToGroup(contact, group);
 
-                        app.ContactH.RemoveContactFromGroup(contact, group);
+                       oldList = group.GetContacts();
 
-                       
+                      app.ContactH.RemoveContactFromGroup(contact, group);
+                        
+                   
+
                 }
                     else
                     {
