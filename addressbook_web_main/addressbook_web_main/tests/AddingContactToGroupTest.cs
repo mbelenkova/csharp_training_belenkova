@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using NUnit.Framework;
 
 namespace addressbook_web_main
 {
-   public class AddingContactToGroupTest: AuthTestBase
+    public class AddingContactToGroupTest : AuthTestBase
     {
         [Test]
 
@@ -76,18 +77,22 @@ namespace addressbook_web_main
             }
 
             GroupData group = GroupData.GetAll()[0];
+            
             List<ContactData> oldList = group.GetContacts();
+
+            List<ContactData> contacts_old = ContactData.GetAll();
+            //ContactData contacts = ContactData.GetAll().Except(oldList).First();
 
             foreach (ContactData contact in ContactData.GetAll())
             {
 
 
-              
 
 
-              //  List<ContactData> oldList = group.GetContacts();
 
-          //    ContactData  contact = ContactData.GetAll().Except(oldList).First();
+                //  List<ContactData> oldList = group.GetContacts();
+
+             
 
 
                 //actions
@@ -95,7 +100,7 @@ namespace addressbook_web_main
                 {
 
                     // app.Navigat.OpenHomePage();
-                   ContactData newCo = new ContactData("mary", "bel");
+                    ContactData newCo = new ContactData("mary", "bel");
 
                     newCo.Lastname = "bel";
                     newCo.Nickname = "marybel";
@@ -103,36 +108,47 @@ namespace addressbook_web_main
                     newCo.Address = "address";
 
 
+
                     app.ContactH.ContactCreater(newCo);
 
-                    app.ContactH.AddContactToGroup(newCo, group);
+                   List <ContactData> contacts_new = ContactData.GetAll().Except(contacts_old).ToList();
+                    ContactData contacttoadd = contacts_new.First();
+
+
+                    app.ContactH.AddContactToGroup(contacttoadd, group);
+                        
+
+
+
+
+                    
 
 
                     //   oldList = group.GetContacts();
 
-                 
+
 
 
                 }
                 else
 
                 {
-                   
+
                     app.ContactH.AddContactToGroup(contact, group);
-                 
+
 
                 }
 
-                
 
-                    foreach (GroupData group_n in GroupData.GetAll())
+
+                foreach (GroupData group_n in GroupData.GetAll())
                 {
 
-                    if (group_n.Id ==group.Id)
+                    if (group_n.Id == group.Id)
                     {
                         List<ContactData> newList = group.GetContacts();
 
-                       
+
 
                         newList.Sort();
 
@@ -143,13 +159,13 @@ namespace addressbook_web_main
                         Assert.AreEqual(oldList, newList);
                     }
 
-                   
+
                 }
 
 
-               // GroupData groupnew = groupn[Convert.ToInt32(group.Id)];
+                // GroupData groupnew = groupn[Convert.ToInt32(group.Id)];
 
-              //  List<ContactData> newList = groupnew.GetContacts();
+                //  List<ContactData> newList = groupnew.GetContacts();
 
 
 
