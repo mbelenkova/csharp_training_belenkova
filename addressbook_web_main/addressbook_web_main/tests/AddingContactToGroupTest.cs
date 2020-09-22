@@ -13,22 +13,125 @@ namespace addressbook_web_main
 
         public void TestAddingContactToGroup()
         {
-            GroupData group = GroupData.GetAll()[0];
-            List<ContactData> oldList = group.GetContacts();
-            ContactData contact =  ContactData.GetAll().Except(oldList).First();
 
-            //actions
+            app.Navigat.OpenHomePage();
 
-            app.ContactH.AddContactToGroup(contact,group);
+            if (!app.ContactH.IsElementPresent(app.ContactH.IsContactPresent))
+            {
+                ContactData contact_t = new ContactData("mary", "bel");
 
-            List<ContactData> newList = group.GetContacts();
+                contact_t.Lastname = "bel";
+                contact_t.Nickname = "marybel";
 
-            oldList.Add(contact);
+                contact_t.Address = "address";
 
-            newList.Sort();
-            oldList.Sort();
 
-            Assert.AreEqual(oldList,newList);
+                app.ContactH.ContactCreater(contact_t);
+
+
+            }
+            app.Navigat.GoToGroupsPage();
+            if (!app.GruopH.IsElementPresent(app.GruopH.IsGroupPresent))
+            {
+
+                GroupData group_t = new GroupData("test_mary");
+                group_t.Header = "test_mary";
+                group_t.Footer = "test_mary";
+
+
+
+                app.GruopH.Create(group_t);
+
+
+
+            }
+
+            app.Navigat.OpenHomePage();
+            if (!app.GruopH.IsElementPresent(app.GruopH.IsGroupPresent) && !app.ContactH.IsElementPresent(app.ContactH.IsContactPresent))
+            {
+                ContactData contact_t = new ContactData("mary", "bel");
+
+                contact_t.Lastname = "bel";
+
+
+                contact_t.Address = "address";
+
+
+
+
+                app.ContactH.ContactCreater(contact_t);
+
+
+                GroupData group_t = new GroupData("test_mary");
+                group_t.Header = "test_mary";
+                group_t.Footer = "test_mary";
+
+
+
+                app.GruopH.Create(group_t);
+
+
+
+
+            }
+
+
+
+
+
+            foreach (ContactData contact in ContactData.GetAll())
+            {
+
+
+                GroupData group = GroupData.GetAll()[0];
+
+
+                List<ContactData> oldList = group.GetContacts();
+
+               // ContactData contact = ContactData.GetAll().First();
+
+
+                //actions
+                if (contact.GetGroups().Count == GroupData.GetAll().Count)
+                {
+                    // app.Navigat.OpenHomePage();
+                   ContactData newCo = new ContactData("mary", "bel");
+
+                    newCo.Lastname = "bel";
+                    newCo.Nickname = "marybel";
+
+                    newCo.Address = "address";
+
+
+                    app.ContactH.ContactCreater(newCo);
+
+                    app.ContactH.AddContactToGroup(contact, group);
+
+                    oldList = group.GetContacts();
+
+                    ContactData.GetAll().Except(oldList).First();
+
+
+                }
+                else
+
+                {
+                    oldList = group.GetContacts();
+                    app.ContactH.AddContactToGroup(contact, group);
+                }
+
+
+                List<ContactData> newList = group.GetContacts();
+
+                oldList.Add(contact);
+
+                newList.Sort();
+                oldList.Sort();
+
+                Assert.AreEqual(oldList, newList);
+
+
+            }
 
         }
     }
