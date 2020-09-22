@@ -76,7 +76,6 @@ namespace addressbook_web_main
             }
 
             GroupData group = GroupData.GetAll()[0];
-
             List<ContactData> oldList = group.GetContacts();
 
             foreach (ContactData contact in ContactData.GetAll())
@@ -106,11 +105,12 @@ namespace addressbook_web_main
 
                     app.ContactH.ContactCreater(newCo);
 
-                    app.ContactH.AddContactToGroup(contact, group);
+                    app.ContactH.AddContactToGroup(newCo, group);
 
-                 //   oldList = group.GetContacts();
 
-                   
+                    //   oldList = group.GetContacts();
+
+                 
 
 
                 }
@@ -119,17 +119,38 @@ namespace addressbook_web_main
                 {
                    
                     app.ContactH.AddContactToGroup(contact, group);
+                 
+
+                }
+
+                
+
+                    foreach (GroupData group_n in GroupData.GetAll())
+                {
+
+                    if (group_n.Id ==group.Id)
+                    {
+                        List<ContactData> newList = group.GetContacts();
+
+                       
+
+                        newList.Sort();
+
+                        oldList.Sort();
+
+                        oldList.Add(contact);
+
+                        Assert.AreEqual(oldList, newList);
+                    }
+
+                   
                 }
 
 
-                List<ContactData> newList = group.GetContacts();
+               // GroupData groupnew = groupn[Convert.ToInt32(group.Id)];
 
-                oldList.Add(contact);
+              //  List<ContactData> newList = groupnew.GetContacts();
 
-                newList.Sort();
-                oldList.Sort();
-
-                Assert.AreEqual(oldList, newList);
 
 
             }

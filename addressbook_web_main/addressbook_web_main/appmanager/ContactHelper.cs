@@ -233,6 +233,7 @@ namespace addressbook_web_main
 
         public ContactHelper SelectContact(String id)
         {
+          
             driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
             return this;
         }
@@ -297,6 +298,9 @@ namespace addressbook_web_main
         {
             //submit
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+
+         //   driver.SwitchTo().Alert().Accept();
+         //   driver.FindElement(By.CssSelector("div.msgbox"));
 
             ContactCach = null;
            
