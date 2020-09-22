@@ -75,25 +75,26 @@ namespace addressbook_web_main
 
             }
 
+            GroupData group = GroupData.GetAll()[0];
 
-
-
+            List<ContactData> oldList = group.GetContacts();
 
             foreach (ContactData contact in ContactData.GetAll())
             {
 
 
-                GroupData group = GroupData.GetAll()[0];
+              
 
 
-                List<ContactData> oldList = group.GetContacts();
+              //  List<ContactData> oldList = group.GetContacts();
 
-               // ContactData contact = ContactData.GetAll().First();
+          //    ContactData  contact = ContactData.GetAll().Except(oldList).First();
 
 
                 //actions
                 if (contact.GetGroups().Count == GroupData.GetAll().Count)
                 {
+
                     // app.Navigat.OpenHomePage();
                    ContactData newCo = new ContactData("mary", "bel");
 
@@ -107,16 +108,16 @@ namespace addressbook_web_main
 
                     app.ContactH.AddContactToGroup(contact, group);
 
-                    oldList = group.GetContacts();
+                 //   oldList = group.GetContacts();
 
-                    ContactData.GetAll().Except(oldList).First();
+                   
 
 
                 }
                 else
 
                 {
-                    oldList = group.GetContacts();
+                   
                     app.ContactH.AddContactToGroup(contact, group);
                 }
 

@@ -304,8 +304,7 @@ namespace addressbook_web_main
             using (AddressbookDB db = new AddressbookDB())
             {
 
-                return (from g in db.Groups from gcr in db.GCR.Where(P => P.GroupId == Id && P.ContactId == g.Id && g.Deprecated == "0000-00-00 00:00:00") select g).Distinct().ToList();
-
+                return (from g in db.Groups from gcr in db.GCR.Where(P => P.GroupId == g.Id && P.ContactId == Id && g.Deprecated == "0000-00-00 00:00:00") select g).Distinct().ToList();
 
 
             }
