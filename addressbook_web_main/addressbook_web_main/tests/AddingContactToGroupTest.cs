@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,129 +46,64 @@ namespace addressbook_web_main
 
             }
 
-            app.Navigat.OpenHomePage();
-            if (!app.GruopH.IsElementPresent(app.GruopH.IsGroupPresent) && !app.ContactH.IsElementPresent(app.ContactH.IsContactPresent))
-            {
-                ContactData contact_t = new ContactData("mary", "bel");
-
-                contact_t.Lastname = "bel";
 
 
-                contact_t.Address = "address";
-
-
-
-
-                app.ContactH.ContactCreater(contact_t);
-
-
-                GroupData group_t = new GroupData("test_mary");
-                group_t.Header = "test_mary";
-                group_t.Footer = "test_mary";
-
-
-
-                app.GruopH.Create(group_t);
-
-
-
-
-            }
 
             GroupData group = GroupData.GetAll()[0];
-            
             List<ContactData> oldList = group.GetContacts();
+           List <ContactData> oldContacts = ContactData.GetAll();
+           ContactData contactToAdd = null;
 
-            List<ContactData> contacts_old = ContactData.GetAll();
-            //ContactData contacts = ContactData.GetAll().Except(oldList).First();
+          //List<ContactData> contact_to_add = ContactData.GetAll().Except(oldList).ToList();
 
-            foreach (ContactData contact in ContactData.GetAll())
+            if (ContactData.GetAll().Except(oldList).ToList().Count == 0)
             {
+                ContactData newCo = new ContactData("mary", "bel");
+
+              newCo.Lastname = "bel";
+            newCo.Nickname = "marybel";
+
+            newCo.Address = "address";
 
 
+            app.ContactH.ContactCreater(newCo);
 
+            List<ContactData> newContacts = ContactData.GetAll();
+            List<ContactData> ContactsWithoutGroup = newContacts.Except(oldList).ToList();
+            contactToAdd = ContactsWithoutGroup[0];
 
+                app.ContactH.AddContactToGroup(contactToAdd,group);
 
-                //  List<ContactData> oldList = group.GetContacts();
+                List<ContactData> newList = group.GetContacts();
 
-             
+                oldList.Add(contactToAdd);
 
+                newList.Sort();
+                oldList.Sort();
 
-                //actions
-                if (contact.GetGroups().Count == GroupData.GetAll().Count)
-                {
-
-                    // app.Navigat.OpenHomePage();
-                    ContactData newCo = new ContactData("mary", "bel");
-
-                    newCo.Lastname = "bel";
-                    newCo.Nickname = "marybel";
-
-                    newCo.Address = "address";
-
-
-
-                    app.ContactH.ContactCreater(newCo);
-
-                   List <ContactData> contacts_new = ContactData.GetAll().Except(contacts_old).ToList();
-                    ContactData contacttoadd = contacts_new.First();
-
-
-                    app.ContactH.AddContactToGroup(contacttoadd, group);
-                        
-
-
-
-
-                    
-
-
-                    //   oldList = group.GetContacts();
-
-
-
-
-                }
-                else
-
-                {
-
-                    app.ContactH.AddContactToGroup(contact, group);
-
-
-                }
-
-
-
-                foreach (GroupData group_n in GroupData.GetAll())
-                {
-
-                    if (group_n.Id == group.Id)
-                    {
-                        List<ContactData> newList = group.GetContacts();
-
-
-
-                        newList.Sort();
-
-                        oldList.Sort();
-
-                        oldList.Add(contact);
-
-                        Assert.AreEqual(oldList, newList);
-                    }
-
-
-                }
-
-
-                // GroupData groupnew = groupn[Convert.ToInt32(group.Id)];
-
-                //  List<ContactData> newList = groupnew.GetContacts();
-
+                Assert.AreEqual(oldList, newList);
 
 
             }
+            else
+            {
+                ContactData contact_to_add = ContactData.GetAll().Except(oldList).First();
+                app.ContactH.AddContactToGroup(contact_to_add, group);
+
+                List<ContactData> newList = group.GetContacts();
+
+                oldList.Add(contact_to_add);
+
+                newList.Sort();
+                oldList.Sort();
+
+                Assert.AreEqual(oldList, newList);
+
+            }
+
+        
+
+            
 
         }
     }

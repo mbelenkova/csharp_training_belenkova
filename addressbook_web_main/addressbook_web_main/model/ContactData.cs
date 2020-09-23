@@ -65,17 +65,17 @@ namespace addressbook_web_main
 
         public bool Equals(ContactData other)
         {
-            if (Object.ReferenceEquals(other.Lastname, null)&& (Object.ReferenceEquals(other.Firstname, null)))//если тот обьект с которым мы сравниваем равен нул то возвращаем фолсе
+            if (Object.ReferenceEquals(other.Lastname, null)&& (Object.ReferenceEquals(other.Firstname, null)&& Object.ReferenceEquals(other.Id,null)))//если тот обьект с которым мы сравниваем равен нул то возвращаем фолсе
             {
                 return false;
 
             }
-            if (Object.ReferenceEquals(this, other.Lastname)&& (Object.ReferenceEquals(this, other.Firstname)))
+            if (Object.ReferenceEquals(this, other.Lastname)&& (Object.ReferenceEquals(this, other.Firstname)&& (Object.ReferenceEquals(this, other.Id))))
             {
                 return true;
             }
 
-            return Lastname == other.Lastname && Firstname == other.Firstname;
+            return Lastname == other.Lastname && Firstname == other.Firstname && Id==other.Id;
            //return Lastname == other.Lastname;
             
 
