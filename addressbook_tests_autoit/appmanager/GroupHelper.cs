@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +17,7 @@ namespace addressbook_tests_autoit
         public static string GROUPREMOVECONFIRM = "Delete group";
 
         public GroupHelper(ApplicationManager manager) : base(manager) { }
+
 
 
 
