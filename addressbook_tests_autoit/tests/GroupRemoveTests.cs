@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,71 +51,6 @@ namespace addressbook_tests_autoit
             Assert.AreEqual(oldGroups, newGroups);
         }
 
-       
-        /*
-        [Test]
-        public void TestGroupRemover()
-        {
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
-            int  group_to_remove_index;
-            
-            if (oldGroups.Count ==0)
-            {
-                GroupData newGroup = new GroupData()
-                {
-                    Name = "test"
-                };
-
-                app.Groups.Add(newGroup);
-                app.Groups.Add(newGroup);
-
-                List<GroupData> ALLnewG = app.Groups.GetGroupList();
-                List<GroupData> NEWG = ALLnewG.Except(oldGroups).ToList();
-                 oldGroups = NEWG;
-
-            }
-            else
-            {
-                if (oldGroups.Count ==1)
-                {
-                    GroupData newGroup = new GroupData()
-                    {
-                        Name = "test"
-                    };
-
-                    app.Groups.Add(newGroup);
-
-                    List<GroupData> ALLnewG = app.Groups.GetGroupList();
-                    List<GroupData> NEWG = ALLnewG.Except(oldGroups).ToList();
-                    oldGroups = NEWG;
-                }
-
-                else
-                {
-                   if(oldGroups.Count>2)
-                    {
-                    
-
-
-
-                    }
-                }
-            }
-
-
-            GroupData group_to_remove = new GroupData();
-            group_to_remove = oldGroups[1];
-
-            //  app.Groups.Remove(group_to_remove);
-            app.Groups.RemoveGroup(group_to_remove_index);
-
-            List<GroupData> newGroups = app.Groups.GetGroupList();
-
-            oldGroups.Remove(group_to_remove);
-
-            oldGroups.Sort();
-            newGroups.Sort();
-
-             Assert.AreEqual(oldGroups, newGroups);*/
+  
     }
     }
