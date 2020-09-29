@@ -30,7 +30,7 @@ namespace mantis_tests
 
         private void SubmitRegistration()
         {
-            throw new NotImplementedException();
+            driver.FindElement(By.CssSelector("input.width-40 pull-right btn btn-success btn-inverse bigger-110")).Click();
         }
 
         private void FillRegistrationForm(AccountData  account)

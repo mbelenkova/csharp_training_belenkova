@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using NUnit.Framework;
+using System.IO;
 namespace mantis_tests
 {
     [TestFixture]
@@ -11,7 +12,12 @@ namespace mantis_tests
         public void SetUpConfig()
         {
             app.Ftp.BackUpFile("/config_inc.php");
-            app.Ftp.Upload("/config_inc.php", null);
+            using (Stream localFile = File.Open("config_inc.php", FileMode.Open))
+            {
+                app.Ftp.Upload("/config_inc.php", localFile);
+
+            }
+           
           
 
         }
