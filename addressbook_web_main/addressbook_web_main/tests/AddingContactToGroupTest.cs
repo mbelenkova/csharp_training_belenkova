@@ -54,16 +54,18 @@ namespace addressbook_web_main
            List <ContactData> oldContacts = ContactData.GetAll();
            ContactData contactToAdd = null;
 
-          //List<ContactData> contact_to_add = ContactData.GetAll().Except(oldList).ToList();
+            List<ContactData> newList = group.GetContacts();
+
+            //List<ContactData> contact_to_add = ContactData.GetAll().Except(oldList).ToList();
 
             if (ContactData.GetAll().Except(oldList).ToList().Count == 0)
             {
-                ContactData newCo = new ContactData("mary", "bel");
+                ContactData newCo = new ContactData("mary1", "bel1");
 
-              newCo.Lastname = "bel";
-            newCo.Nickname = "marybel";
+              newCo.Lastname = "bel1";
+            newCo.Nickname = "marybel1";
 
-            newCo.Address = "address";
+            newCo.Address = "address1";
 
 
             app.ContactH.ContactCreater(newCo);
@@ -74,7 +76,7 @@ namespace addressbook_web_main
 
                 app.ContactH.AddContactToGroup(contactToAdd,group);
 
-                List<ContactData> newList = group.GetContacts();
+                newList = group.GetContacts();
 
                 oldList.Add(contactToAdd);
 
@@ -88,9 +90,10 @@ namespace addressbook_web_main
             else
             {
                 ContactData contact_to_add = ContactData.GetAll().Except(oldList).First();
+
                 app.ContactH.AddContactToGroup(contact_to_add, group);
 
-                List<ContactData> newList = group.GetContacts();
+                newList = group.GetContacts();
 
                 oldList.Add(contact_to_add);
 

@@ -233,7 +233,7 @@ namespace addressbook_web_main
 
         public ContactHelper SelectContact(String id)
         {
-            By loc = By.XPath("(//input[@name='selected[]' and @value='" + id + "'])");
+             By loc = By.XPath("(//input[@name='selected[]' and @value='" + id + "'])");
             driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+id+"'])")).Click();
 
             return this;
