@@ -76,6 +76,7 @@
     <Compile Include="tests\AccountCreationTests.cs" />
     <Compile Include="tests\AddProject.cs" />
     <Compile Include="tests\AuthTestBase.cs" />
+    <Compile Include="tests\RemoveProject.cs" />
     <Compile Include="tests\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
