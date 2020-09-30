@@ -19,6 +19,9 @@ namespace mantis_tests
        
         protected IWebDriver driver;
         protected string baseURL;
+        protected LoginHelper loginHelper;
+        protected ManagementMenuHelper managementMenuHelper;
+        protected ProjectManagementHelper projectManagementHelper;
 
         public RegistrationHelper Registration { get; set; }
         public FtpHelper Ftp { get; set; }
@@ -35,7 +38,11 @@ namespace mantis_tests
             Registration = new RegistrationHelper(this);
             Ftp = new FtpHelper(this);
            // verificationErrors = new StringBuilder();
-         //  loginHelper = new LoginHelper(this);
+            loginHelper = new LoginHelper(this);
+            managementMenuHelper = new ManagementMenuHelper(this);
+
+            projectManagementHelper = new ProjectManagementHelper(this);
+
           //  navigationHepler = new NavigationHepler(this,baseURL);
           //  groupHelper = new GroupHelper(this);
           //  contactHelper = new ContactHelper(this);
@@ -73,9 +80,21 @@ namespace mantis_tests
             get { return driver; }
 
         }
-      
-        
+        public LoginHelper Auth
+        {
+            get { return loginHelper; }
+        }
 
-       
+        public ManagementMenuHelper Navigat
+        {
+            get { return managementMenuHelper; }
+        }
+
+        public ProjectManagementHelper prManH
+        {
+            get { return projectManagementHelper; }
+
+        }
+
     }
 }

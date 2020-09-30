@@ -12,7 +12,7 @@ namespace mantis_tests
         public void SetUpConfig()
         {
             app.Ftp.BackUpFile("/config_inc.php");
-            using (Stream localFile = File.Open("config_inc.php", FileMode.Open))
+            using (Stream localFile = File.Open(TestContext.CurrentContext.TestDirectory + "\\config_inc.php", FileMode.Open)) // File.Open(TestContext.CurrentContext.TestDirectory + "\\config_inc.php", FileMode.Open))
             {
                 app.Ftp.Upload("/config_inc.php", localFile);
 
@@ -25,11 +25,10 @@ namespace mantis_tests
         [Test]
         public void TestAccountRegistration()
         {
-            AccountData account = new AccountData()
+            AccountData account = new AccountData("testuser", "password")
             {
-                Name = "testuser",
-                Password = "password",
-                Email = "testuser@localhost.localdomain"
+              
+                Email = "testuser@localhost.localdomainone"
 
             };
 

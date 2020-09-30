@@ -25,12 +25,12 @@ namespace mantis_tests
 
         private void OpenRegistrationForm()
         {
-            driver.FindElement(By.ClassName("back-to-login-link pull-left")).Click();
+            driver.FindElement(By.LinkText("Signup for a new account")).Click();
         }
 
         private void SubmitRegistration()
         {
-            driver.FindElement(By.CssSelector("input.width-40 pull-right btn btn-success btn-inverse bigger-110")).Click();
+            driver.FindElement(By.CssSelector("input.width-40.pull-right.btn.btn-success.btn-inverse.bigger-110")).Click();
         }
 
         private void FillRegistrationForm(AccountData  account)
