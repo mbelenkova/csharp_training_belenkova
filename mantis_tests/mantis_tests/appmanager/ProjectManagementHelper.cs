@@ -36,12 +36,45 @@ namespace mantis_tests
             ConfirmRemoving();
             return this;
         }
+        private List<ProjectData> ContactCach = null;
+
+        internal List<ProjectData> GetProjectsList()
+        {
+            if (ContactCach == null)
+            {
+                ContactCach = new List<ProjectData>();
+                manager.Navigat.OpenManageFromMenu();
+                manager.Navigat.OpenManageProjectsFromMenu();
+
+                //  ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("div.table-responsive"));
+
+                IWebElement NTable = driver.FindElement(By.CssSelector("tbody"));//беру таблицу
+
+                ICollection<IWebElement> elements = NTable.FindElements(By.TagName("tr"));//получаювсе записи, которые у нас есть
+
+
+                foreach (IWebElement element in elements)
+                {
+
+                    IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+
+                    ContactCach.Add(new ProjectData(cells[0].Text, cells[4].Text));
+
+                }
+
+
+            }
+
+            return new List<ProjectData> (ContactCach);
+        }
 
         public ProjectManagementHelper ConfirmRemoving()
         {
             driver.FindElement(By.XPath("//div[@id='main-container']/div[2]/div[2]/div/div/div[2]/form/input[4]")).Click();
             return this;
         }
+
+       
 
         public ProjectManagementHelper InitRemoving()
         {

@@ -19,6 +19,7 @@ namespace mantis_tests
 
         public void OpenManageFromMenu()
         {
+            //driver.FindElement(By.CssSelector("i.menu-icon.fa.fa-gears")).Click();
             driver.FindElement(By.XPath("//div[@id='sidebar']/ul/li[7]/a/i")).Click();
         }
 

@@ -23,14 +23,26 @@ namespace mantis_tests
             app.Navigat.OpenManageFromMenu();
             app.Navigat.OpenManageProjectsFromMenu();
 
+            List<ProjectData> OldProjects = app.prManH.GetProjectsList();
+
             Random rnd = new Random();
             int value = rnd.Next();
 
 
             ProjectData projectData = new ProjectData("first"+value,"descFirst");
 
+           
 
             app.prManH.Add(projectData);
+
+            
+
+            List<ProjectData> NewProjects =  app.prManH.GetProjectsList();
+
+            OldProjects.Sort();
+            NewProjects.Sort();
+
+            Assert.AreEqual(OldProjects.Count+1,NewProjects.Count);
 
         }
 
