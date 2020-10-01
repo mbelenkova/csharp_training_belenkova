@@ -39,10 +39,15 @@ namespace mantis_tests
 
             List<ProjectData> NewProjects =  app.prManH.GetProjectsList();
 
+            OldProjects.Add(projectData);
+
             OldProjects.Sort();
             NewProjects.Sort();
 
-            Assert.AreEqual(OldProjects.Count+1,NewProjects.Count);
+            Assert.AreEqual(OldProjects.Count,NewProjects.Count);
+
+           
+            Assert.AreEqual(OldProjects,NewProjects);
 
         }
 

@@ -36,13 +36,35 @@ namespace mantis_tests
 
                 app.prManH.Add(projectData);
             }
+
             List<ProjectData> OldProjects = app.prManH.GetProjectsList();
 
             app.prManH.RemoveProject();
 
             List<ProjectData> NewProjects = app.prManH.GetProjectsList();
 
-            Assert.AreEqual(OldProjects.Count - 1, NewProjects.Count);
+            List<ProjectData> need_remove = OldProjects.Except(NewProjects).ToList();
+
+
+            ProjectData toBeRemoved = need_remove.First();
+
+            OldProjects.Remove(toBeRemoved);
+
+            OldProjects.Sort();
+            NewProjects.Sort();
+
+            Assert.AreEqual(OldProjects, NewProjects);
+
+            Assert.AreEqual(OldProjects.Count, NewProjects.Count);
+
+
+           
+
+          
+
+          
+
+
         }
     }
 }
