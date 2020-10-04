@@ -21,39 +21,35 @@ namespace mantis_tests
         {
             app.Navigat.OpenManageFromMenu();
             app.Navigat.OpenManageProjectsFromMenu();
-            //проверка на то, что есть группы для удаления
-            //если нет групп,создать
-            //записываем в олдлист
-           if(!app.prManH.IsElementPresent(app.prManH.IsProjectPresent))
+            AccountData account = new AccountData("administrator", "root");
+
+            if (!app.prManH.IsElementPresent(app.prManH.IsProjectPresent))
 
             {
+
                 Random rnd = new Random();
                 int value = rnd.Next();
 
 
-                ProjectData projectData = new ProjectData("first" + value, "descFirst");
+                ProjectData project = new ProjectData("new" + value, "new");
 
-
-                app.prManH.Add(projectData);
+                app.prManH.CreateNewProjectFromAPI(account, project);
+               
             }
 
-            List<ProjectData> OldProjects = app.prManH.GetProjectsList();
+            List<Mantis.ProjectData> OldProjects = app.prManH.GetProjectsListFromApi(account);
 
             app.prManH.RemoveProject();
 
-            List<ProjectData> NewProjects = app.prManH.GetProjectsList();
+            List<Mantis.ProjectData> NewProjects = app.prManH.GetProjectsListFromApi(account);
 
-            List<ProjectData> need_remove = OldProjects.Except(NewProjects).ToList();
+            List<Mantis.ProjectData> need_remove = OldProjects.Except(NewProjects).ToList();
 
 
-            ProjectData toBeRemoved = need_remove.First();
+            Mantis.ProjectData toBeRemoved = need_remove.First();
 
             OldProjects.Remove(toBeRemoved);
 
-            OldProjects.Sort();
-            NewProjects.Sort();
-
-            Assert.AreEqual(OldProjects, NewProjects);
 
             Assert.AreEqual(OldProjects.Count, NewProjects.Count);
 

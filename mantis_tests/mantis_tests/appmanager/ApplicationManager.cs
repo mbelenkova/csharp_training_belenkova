@@ -22,6 +22,7 @@ namespace mantis_tests
         protected LoginHelper loginHelper;
         protected ManagementMenuHelper managementMenuHelper;
         protected ProjectManagementHelper projectManagementHelper;
+        protected APIHelper apiHelper;
 
         public RegistrationHelper Registration { get; set; }
         public FtpHelper Ftp { get; set; }
@@ -42,6 +43,8 @@ namespace mantis_tests
             managementMenuHelper = new ManagementMenuHelper(this);
 
             projectManagementHelper = new ProjectManagementHelper(this);
+
+            apiHelper = new APIHelper(this);
 
           //  navigationHepler = new NavigationHepler(this,baseURL);
           //  groupHelper = new GroupHelper(this);
@@ -93,6 +96,12 @@ namespace mantis_tests
         public ProjectManagementHelper prManH
         {
             get { return projectManagementHelper; }
+
+        }
+
+        public APIHelper apiH
+        {
+            get { return apiHelper; }
 
         }
 

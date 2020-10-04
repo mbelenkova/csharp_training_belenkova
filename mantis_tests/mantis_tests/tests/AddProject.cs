@@ -23,32 +23,39 @@ namespace mantis_tests
             app.Navigat.OpenManageFromMenu();
             app.Navigat.OpenManageProjectsFromMenu();
 
-            List<ProjectData> OldProjects = app.prManH.GetProjectsList();
+            // List<ProjectData> OldProjects = app.prManH.GetProjectsList();
+            AccountData account = new AccountData("administrator", "root");
 
-            Random rnd = new Random();
-            int value = rnd.Next();
-
-
-            ProjectData projectData = new ProjectData("first"+value,"descFirst");
-
-           
-
-            app.prManH.Add(projectData);
+            List<Mantis.ProjectData> OldProjects = app.prManH.GetProjectsListFromApi(account);
 
             
+                        Random rnd = new Random();
+                        int value = rnd.Next();
 
-            List<ProjectData> NewProjects =  app.prManH.GetProjectsList();
+             ProjectData project = new ProjectData("name" + value, "desc");
 
-            OldProjects.Add(projectData);
+            app.prManH.CreateNewProjectFromAPI(account, project);
 
-            OldProjects.Sort();
-            NewProjects.Sort();
-
-            Assert.AreEqual(OldProjects.Count,NewProjects.Count);
+            //  ProjectData projectData = new ProjectData("name" + value,"desc");
 
            
-            Assert.AreEqual(OldProjects,NewProjects);
+            //  app.prManH.Add(projectData);
 
+
+
+            // List<ProjectData> NewProjects =  app.prManH.GetProjectsList();
+            List<Mantis.ProjectData> NewProjects = app.prManH.GetProjectsListFromApi(account);
+
+
+            List<Mantis.ProjectData> between = NewProjects.Except(OldProjects).ToList();
+            Mantis.ProjectData project_to_add = between.First();
+           
+             OldProjects.Add(project_to_add);
+
+       
+
+            Assert.AreEqual(OldProjects.Count,NewProjects.Count);
+           
         }
 
 

@@ -84,38 +84,63 @@ namespace mantis_tests
             return this;
         }
 
+        public void CreateNewProjectFromAPI(AccountData account, ProjectData project)
+        {
+            Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+            Mantis.ProjectData project_new = new Mantis.ProjectData();
+            project_new.name = project.Pr_name;
+            project_new.description = project.Pr_description;
+            client.mc_project_add(account.Name, account.Password, project_new);
+
+
+
+
+        }
+
+
+       public List<Mantis.ProjectData> GetProjectsListFromApi(AccountData account)
+        {
+          
+          Mantis.MantisConnectPortTypeClient client = new Mantis.MantisConnectPortTypeClient();
+
+        return  new List<Mantis.ProjectData> (client.mc_projects_get_user_accessible(account.Name, account.Password));
+
+       
+
+        }
 
         private List<ProjectData> ProjectCach = null;
 
         internal List<ProjectData> GetProjectsList()
         {
-            if (ProjectCach == null)
-            {
-                ProjectCach = new List<ProjectData>();
-                manager.Navigat.OpenManageFromMenu();
-                manager.Navigat.OpenManageProjectsFromMenu();
+             if (ProjectCach == null)
+             {
+                 ProjectCach = new List<ProjectData>();
+                 manager.Navigat.OpenManageFromMenu();
+                 manager.Navigat.OpenManageProjectsFromMenu();
 
-                //  ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("div.table-responsive"));
+                 //  ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("div.table-responsive"));
 
-                IWebElement NTable = driver.FindElement(By.CssSelector("tbody"));//беру таблицу
+                 IWebElement NTable = driver.FindElement(By.CssSelector("tbody"));//беру таблицу
 
-                ICollection<IWebElement> elements = NTable.FindElements(By.TagName("tr"));//получаювсе записи, которые у нас есть
-
-
-                foreach (IWebElement element in elements)
-                {
-
-                    IList<IWebElement> cells = element.FindElements(By.TagName("td"));
-
-                    ProjectCach.Add(new ProjectData(cells[0].Text, cells[4].Text));
-
-                }
+                 ICollection<IWebElement> elements = NTable.FindElements(By.TagName("tr"));//получаювсе записи, которые у нас есть
 
 
-            }
+                 foreach (IWebElement element in elements)
+                 {
 
-            return new List<ProjectData>(ProjectCach);
+                     IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+
+                     ProjectCach.Add(new ProjectData(cells[0].Text, cells[4].Text));
+
+
+                 }
+
+
+             }
+
+             return new List<ProjectData>(ProjectCach);
+         }
+           
         }
-
-    }
 }

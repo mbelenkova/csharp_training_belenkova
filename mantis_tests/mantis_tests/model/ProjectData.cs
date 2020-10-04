@@ -14,6 +14,7 @@ namespace mantis_tests
     {
         private string pr_name = "";
         private string pr_description = "";
+        
 
         public ProjectData(string pr_name, string pr_description)
         {
@@ -21,10 +22,9 @@ namespace mantis_tests
            this.pr_description = pr_description;
 
 
+
         }
-
-
-
+   
         public string Pr_name
         {
             get
@@ -49,7 +49,7 @@ namespace mantis_tests
             }
         }
 
-
+       
         public bool Equals(ProjectData other)
         {
             if (Object.ReferenceEquals(other.pr_name, null) && (Object.ReferenceEquals(other.pr_description, null)))//если тот обьект с которым мы сравниваем равен нул то возвращаем фолсе
@@ -59,6 +59,7 @@ namespace mantis_tests
             }
             if (Object.ReferenceEquals(this, other.pr_name) && (Object.ReferenceEquals(this, other.pr_description) ))
             {
+               
                 return true;
             }
 
