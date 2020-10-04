@@ -21,6 +21,8 @@ namespace mantis_tests
         {
             app.Navigat.OpenManageFromMenu();
             app.Navigat.OpenManageProjectsFromMenu();
+            List<ProjectData> Newlist = new List<ProjectData>();
+            List<ProjectData> Oldlist = new List<ProjectData>();
             AccountData account = new AccountData("administrator", "root");
 
             if (!app.prManH.IsElementPresent(app.prManH.IsProjectPresent))
@@ -39,22 +41,44 @@ namespace mantis_tests
 
             List<Mantis.ProjectData> OldProjects = app.prManH.GetProjectsListFromApi(account);
 
+
+            for (int i = 0; i < OldProjects.Count; i++)
+            {
+
+                Oldlist.Add(new ProjectData(OldProjects[i].name, OldProjects[i].description));
+
+            }
+            app.Navigat.OpenManageFromMenu();
+            app.Navigat.OpenManageProjectsFromMenu();
+
             app.prManH.RemoveProject();
+
+
+
 
             List<Mantis.ProjectData> NewProjects = app.prManH.GetProjectsListFromApi(account);
 
-            List<Mantis.ProjectData> need_remove = OldProjects.Except(NewProjects).ToList();
+
+            for (int i = 0; i < NewProjects.Count; i++)
+            {
+
+                Newlist.Add(new ProjectData(NewProjects[i].name, NewProjects[i].description));
+
+            }
+
+            List<ProjectData> pr_to_removeList = Oldlist.Except(Newlist).ToList();
+            ProjectData toBeRemoved = pr_to_removeList.First();
+
+            Oldlist.Remove(toBeRemoved);
 
 
-            Mantis.ProjectData toBeRemoved = need_remove.First();
+            Assert.AreEqual(Oldlist.Count, Newlist.Count);
 
-            OldProjects.Remove(toBeRemoved);
-
-
-            Assert.AreEqual(OldProjects.Count, NewProjects.Count);
+            Oldlist.Sort();
+            Newlist.Sort();
 
 
-           
+            Assert.AreEqual(Oldlist,Newlist);
 
           
 
